@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Red River One — Property Management That Delivers Results</title>
   <meta name="description" content="Multi-family and single-family property management in Texas. Data-driven operations, transparent reporting, and measurable results for property owners and investors." />
+  <meta name="theme-color" content="#0d0d0d" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- OG / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="RedRiverOne — Property Management That Delivers Results" />
+  <meta property="og:description" content="Multi-family and single-family property management in Texas. Data-driven operations, transparent reporting, and measurable results." />
+  <meta property="og:url" content="https://redriverone.github.io/properties/" />
+  <meta property="og:image" content="assets/images/portfolio/whitestone-1.jpg" />
+  <meta property="og:site_name" content="RedRiverOne Property Management" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RedRiverOne — Property Management That Delivers Results" />
+  <meta name="twitter:description" content="Multi-family and single-family property management in Texas." />
+  <meta name="twitter:image" content="assets/images/portfolio/whitestone-1.jpg" />
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://redriverone.github.io/properties/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Red River One LLC" />
   <link rel="icon" href="assets/images/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -147,6 +168,54 @@
     /* ═══ ANIMATIONS ═══ */
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ═══ MOBILE RESPONSIVE ═══ */
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .hero-content { padding: 120px 0 60px; }
+      .hero h1 { font-size: clamp(28px, 8vw, 40px); line-height: 1.15; }
+      .hero-sub { font-size: 15px; margin-top: 16px; }
+      .hero-eyebrow { font-size: 10px; padding: 6px 14px; letter-spacing: 1.5px; }
+      .hero-actions { gap: 12px; margin-top: 28px; }
+      .btn-primary, .btn-ghost { padding: 14px 28px; font-size: 14px; width: 100%; text-align: center; }
+      .hero-stats { margin-top: 40px; gap: 1px; border-radius: 14px; }
+      .hero-stat { padding: 16px 12px; }
+      .hero-stat-value { font-size: 24px; }
+      .hero-stat-label { font-size: 10px; }
+      .section { padding: 64px 0; }
+      .section-header { margin-bottom: 36px; }
+      .section-title { font-size: clamp(24px, 6vw, 32px); }
+      .section-body { font-size: 15px; }
+      .service-card { padding: 24px; }
+      .service-no { font-size: 36px; }
+      .service-card h3 { font-size: 18px; }
+      .portfolio-info { padding: 16px; }
+      .portfolio-name { font-size: 17px; }
+      .metric-value { font-size: 36px; }
+      .metric-card { padding: 24px; }
+      .metrics-grid { gap: 12px; }
+      .process-step { padding: 24px 20px; }
+      .process-step::before { font-size: 40px; }
+      .cta-section { padding: 64px 0; }
+      .cta-section .section-title { font-size: clamp(24px, 6vw, 32px); }
+      .btn-white { padding: 14px 32px; font-size: 14px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+      .logo { font-size: 20px; }
+      .nav { padding: 14px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .hero h1 { font-size: 28px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .hero-stat-value { font-size: 22px; }
+      .portfolio-tags { gap: 4px; }
+      .portfolio-tag { font-size: 10px; padding: 3px 10px; }
+      .service-tags { gap: 6px; }
+      .cta-actions { flex-direction: column; }
+      .btn-white { width: 100%; text-align: center; }
+    }
   </style>
 </head>
 <body>
