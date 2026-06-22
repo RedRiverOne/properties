@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red River One — Property Management That Actually Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<style>
+:root {
+  /* Styleguide reskin — old token names remapped onto the new design system */
+  --ember:#f26625; --ember-dk:#b53d0f; --ember-lt:#fa8a5b;
+  --clay:#fa8a5b; --parchment:#f9f9f9; --linen:#ffffff;
+  --ink:#0a0a0a; --ink-soft:#141414; --ink-mid:rgba(10,10,10,.62); --ink-pale:rgba(10,10,10,.42);
+  --rule:#ededed; --white:#fff; --slate:#0a0a0a; --slate-lt:#1f1f1f;
+  --serif:'Inter Tight','Inter',ui-sans-serif,system-ui,sans-serif;
+  --sans:'Inter',ui-sans-serif,system-ui,sans-serif;
+  --mono:'JetBrains Mono','Geist Mono',ui-monospace,monospace;
+  --accent-serif:'Instrument Serif','Cormorant Garamond',Georgia,serif;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:#fff;color:var(--ink);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.35;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:var(--ember);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:58px;background:rgba(255,255,255,0.96);border-bottom:1px solid var(--rule);backdrop-filter:blur(12px);}
+.nb{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nb img{height:36px;}
+.nb-t{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);}
+.nb-t span{color:var(--ember);}
+.nl{display:flex;list-style:none;gap:20px;align-items:center;}
+.nl a{font-size:12.5px;color:var(--ink-mid);text-decoration:none;transition:color .2s;}
+.nl a:hover{color:var(--ember);}
+.n-cta{font-size:13px;font-weight:500;color:#fff;background:var(--ember);padding:8px 20px;border-radius:2px;text-decoration:none;margin-left:6px;}
+.n-cta:hover{background:var(--ember-dk);}
+
+/* BUTTONS */
+.bp{background:var(--ember);color:#fff;padding:13px 28px;border-radius:2px;text-decoration:none;font-size:14px;font-weight:500;transition:background .2s;display:inline-block;}
+.bp:hover{background:var(--ember-dk);}
+.bg{background:transparent;color:var(--ink-soft);border:1px solid var(--rule);padding:13px 28px;border-radius:2px;text-decoration:none;font-size:14px;display:inline-block;transition:border-color .2s;}
+.bg:hover{border-color:var(--ink-soft);}
+.bgw{background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.18);padding:13px 28px;border-radius:2px;text-decoration:none;font-size:14px;transition:border-color .2s,color .2s;}
+.bgw:hover{border-color:rgba(255,255,255,.38);color:#fff;}
+
+/* HERO */
+.hero{min-height:100vh;padding:128px 40px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1280px;margin:0 auto;align-items:center;}
+.h-eye{font-size:12px;font-family:var(--mono);color:var(--ember);letter-spacing:.08em;margin-bottom:24px;opacity:0;animation:fu .8s var(--ease) .1s forwards;}
+.h-h1{font-family:var(--serif);font-size:clamp(38px,4.6vw,68px);font-weight:700;line-height:1.06;color:var(--ink);letter-spacing:-.02em;margin-bottom:20px;opacity:0;animation:fu .9s var(--ease) .2s forwards;}
+.h-h1 em{font-style:italic;font-weight:400;color:var(--ember);}
+.h-p{font-size:17px;line-height:1.85;color:var(--ink-soft);max-width:520px;margin-bottom:26px;opacity:0;animation:fu .9s var(--ease) .35s forwards;}
+.h-box{background:var(--linen);border-left:3px solid var(--ember);padding:16px 20px;margin-bottom:26px;border-radius:0 4px 4px 0;opacity:0;animation:fu .9s var(--ease) .5s forwards;}
+.h-box p{font-size:14px;color:var(--ink-soft);line-height:1.72;}
+.h-box strong{color:var(--ink);font-weight:600;}
+.h-ctas{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fu .9s var(--ease) .62s forwards;}
+.hero-r{opacity:0;animation:fu 1s var(--ease) .38s forwards;}
+.fn{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:40px;position:relative;box-shadow:0 4px 40px rgba(26,22,18,.06);}
+.fn::before{content:'"';font-family:var(--serif);font-size:120px;line-height:1;color:var(--clay);position:absolute;top:-12px;left:28px;pointer-events:none;}
+.fn-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.fn-lbl::after{content:'';flex:1;height:1px;background:var(--rule);}
+.fn-body{font-family:var(--serif);font-size:15px;line-height:1.88;color:var(--ink-soft);font-style:italic;margin-bottom:24px;}
+.fn-body strong{font-style:normal;color:var(--ink);font-weight:700;}
+.fn-sig{display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid var(--rule);}
+.av{width:36px;height:36px;border-radius:50%;border:2px solid var(--white);margin-right:-8px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:14px;color:#fff;}
+.av-a{background:linear-gradient(135deg,#1D3250,#2E4A6E);}
+.av-b{background:linear-gradient(135deg,var(--ember),var(--ember-dk));}
+.fn-st{font-size:13px;color:var(--ink-mid);line-height:1.4;}
+.fn-st strong{color:var(--ink);font-weight:600;font-size:13.5px;}
+
+/* MARQUEE */
+.mq{overflow:hidden;background:var(--ink);padding:11px 0;}
+.mq-t{display:flex;gap:48px;white-space:nowrap;animation:mqs 40s linear infinite;}
+.mq-i{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.22);flex-shrink:0;display:flex;align-items:center;gap:10px;}
+.mq-i span{color:var(--ember-lt);}
+@keyframes mqs{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.sec{padding:92px 40px;}
+.si{max-width:1280px;margin:0 auto;}
+.eye{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.eye::before{content:'';display:block;width:20px;height:1px;background:var(--ember);}
+.sh{font-family:var(--serif);font-size:clamp(28px,3.6vw,48px);font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin-bottom:16px;}
+.sh em{font-style:italic;font-weight:400;color:var(--ember);}
+.sl{font-size:16px;line-height:1.85;color:var(--ink-soft);max-width:640px;margin-bottom:48px;}
+
+/* CALLOUT */
+.callout{background:var(--white);border:1px solid var(--rule);border-left:3px solid var(--ember);padding:22px 26px;margin-bottom:36px;border-radius:0 4px 4px 0;}
+.callout p{font-size:14.5px;color:var(--ink-soft);line-height:1.78;}
+.callout strong{color:var(--ink);font-weight:600;}
+.callout-s{border-left-color:var(--slate);}
+.callout-dk{background:rgba(255,255,255,.05);border-color:rgba(212,87,26,.4);border-left-color:var(--ember-lt);}
+.callout-dk p{color:rgba(255,255,255,.6);}
+.callout-dk strong{color:rgba(255,255,255,.88);}
+
+/* STORY */
+.story-sec{background:var(--linen);border-top:1px solid var(--rule);}
+.story-g{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:start;}
+.st p{font-size:15.5px;line-height:1.92;color:var(--ink-soft);margin-bottom:18px;}
+.st strong{color:var(--ink);font-weight:600;}
+.pull{font-family:var(--serif);font-size:20px;font-style:italic;line-height:1.6;color:var(--ink);border-left:3px solid var(--ember);padding-left:24px;margin:28px 0;}
+.wwd{display:flex;flex-direction:column;gap:1px;}
+.wc{background:var(--white);border:1px solid var(--rule);padding:26px 28px;transition:transform .2s,box-shadow .2s;}
+.wc:hover{transform:translateX(4px);box-shadow:-4px 0 0 var(--ember);}
+.wc-n{font-family:var(--mono);font-size:10px;color:var(--ember);letter-spacing:.1em;margin-bottom:7px;}
+.wc-t{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:7px;}
+.wc-b{font-size:13.5px;color:var(--ink-soft);line-height:1.75;}
+
+/* LIFECYCLE */
+.lc-sec{border-top:1px solid var(--rule);}
+.lc-intro{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:start;margin-bottom:52px;}
+.lc-intro p{font-size:15.5px;color:var(--ink-soft);line-height:1.9;margin-bottom:16px;}
+.lc-intro strong{color:var(--ink);font-weight:600;}
+.lc-map{background:var(--ink);border-radius:4px;padding:28px;position:sticky;top:70px;}
+.lc-map-t{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember-lt);margin-bottom:18px;}
+.lc-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);transition:padding-left .2s;cursor:default;}
+.lc-row:hover{padding-left:5px;}
+.lc-row:last-child{border-bottom:none;}
+.lc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.d-e{background:var(--ember);}
+.d-s{background:#4A6A9A;}
+.d-p{background:rgba(255,255,255,.18);}
+.lc-rn{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.7);}
+.lc-rs{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.26);margin-left:auto;}
+
+/* LIFECYCLE STEPS */
+.lcs{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:44px;}
+.ls{display:grid;grid-template-columns:72px 1fr 280px;background:var(--white);}
+.ls:hover .ls-m{background:var(--parchment);}
+.ls-idx{background:var(--parchment);border-right:1px solid var(--rule);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:26px 10px;gap:7px;}
+.ls-n{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--clay);line-height:1;}
+.ls-dot{width:7px;height:7px;border-radius:50%;background:var(--ember);}
+.ls-m{padding:26px 26px 26px 22px;border-right:1px solid var(--rule);transition:background .2s;}
+.ls-ph{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);margin-bottom:5px;}
+.ls-t{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:9px;line-height:1.3;}
+.ls-b{font-size:13.5px;color:var(--ink-soft);line-height:1.78;}
+.ls-tasks{margin-top:12px;display:flex;flex-direction:column;gap:5px;}
+.ls-task{font-size:12.5px;color:var(--ink-mid);display:flex;align-items:flex-start;gap:7px;line-height:1.5;}
+.ls-task::before{content:'→';color:var(--ember);flex-shrink:0;font-size:10px;margin-top:2px;}
+.ls-kpi{padding:26px 20px;background:var(--linen);}
+.ls-kpi-t{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-pale);margin-bottom:12px;}
+.km{margin-bottom:14px;}
+.km:last-child{margin-bottom:0;}
+.km-n{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--ink);letter-spacing:.03em;margin-bottom:3px;}
+.km-d{font-size:11.5px;color:var(--ink-mid);line-height:1.55;}
+/* dark lifecycle steps */
+.ls-dk .ls-idx{background:var(--ink);border-right-color:rgba(255,255,255,.07);}
+.ls-dk .ls-n{color:rgba(255,255,255,.1);}
+.ls-dk .ls-m{background:var(--ink);}
+.ls-dk:hover .ls-m{background:#201c17;}
+.ls-dk .ls-ph{color:var(--ember-lt);}
+.ls-dk .ls-t{color:#fff;}
+.ls-dk .ls-b{color:rgba(255,255,255,.56);}
+.ls-dk .ls-task{color:rgba(255,255,255,.52);}
+.ls-dk .ls-kpi{background:#0e0c09;}
+.ls-dk .ls-kpi-t{color:rgba(255,255,255,.25);}
+.ls-dk .km-n{color:rgba(255,255,255,.78);}
+.ls-dk .km-d{color:rgba(255,255,255,.4);}
+
+/* MEASURE */
+.msr-sec{background:var(--linen);border-top:1px solid var(--rule);}
+.msr-g{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-bottom:48px;}
+.msr-t p{font-size:15.5px;color:var(--ink-soft);line-height:1.9;margin-bottom:18px;}
+.msr-t strong{color:var(--ink);font-weight:600;}
+.msr-t em{font-style:italic;}
+.mpull{font-family:var(--serif);font-size:19px;font-style:italic;line-height:1.65;color:var(--ink);border-left:3px solid var(--ember);padding-left:22px;margin:26px 0;}
+.loop-card{background:var(--ink);border-radius:4px;padding:32px;margin-bottom:20px;}
+.loop-t{font-family:var(--serif);font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;}
+.loop-s{font-size:13px;color:rgba(255,255,255,.42);margin-bottom:26px;line-height:1.6;}
+.loop-steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative;}
+.loop-steps::after{content:'';position:absolute;top:23px;left:8%;width:84%;height:1px;background:rgba(212,87,26,.3);z-index:0;}
+.lstep{display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px;position:relative;z-index:1;}
+.ld{width:46px;height:46px;border-radius:50%;background:var(--ember);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:#fff;border:3px solid var(--ink);}
+.ln{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.68);line-height:1.4;}
+.ld-d{font-size:10px;color:rgba(255,255,255,.32);line-height:1.5;}
+
+/* KPI TIERS */
+.kpi-tiers{display:flex;flex-direction:column;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:40px;}
+.kt{background:var(--white);display:grid;grid-template-columns:190px 1fr;}
+.kt-l{background:var(--parchment);border-right:1px solid var(--rule);padding:22px 18px;display:flex;flex-direction:column;gap:5px;}
+.kt-n{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink);line-height:1.25;}
+.kt-s{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ember);}
+.kt-b{padding:22px 26px;}
+.kt-b p{font-size:13.5px;color:var(--ink-soft);line-height:1.75;margin-bottom:12px;}
+.ki-wrap{display:flex;flex-wrap:wrap;gap:7px;}
+.ki{font-family:var(--mono);font-size:10px;padding:4px 11px;border:1px solid var(--rule);color:var(--ink-soft);border-radius:2px;letter-spacing:.03em;}
+.ki-e{border-color:rgba(212,87,26,.25);color:var(--ember);background:rgba(212,87,26,.04);}
+.ki-s{border-color:rgba(29,50,80,.2);color:var(--slate);background:rgba(29,50,80,.03);}
+
+/* PREVENTION */
+.prev-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);}
+.pc{background:var(--white);padding:26px;transition:background .2s;}
+.pc:hover{background:var(--parchment);}
+.pc-ico{font-size:26px;margin-bottom:11px;}
+.pc-t{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:7px;}
+.pc-b{font-size:13px;color:var(--ink-soft);line-height:1.78;}
+
+/* AI NATIVE */
+.ai-sec{border-top:1px solid var(--rule);}
+.ai-hero{background:linear-gradient(135deg,var(--slate) 0%,#0F1E33 100%);border-radius:6px;padding:52px;margin-bottom:40px;position:relative;overflow:hidden;}
+.ai-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(212,87,26,.18) 0%,transparent 70%);}
+.ai-hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(212,87,26,.1) 0%,transparent 70%);}
+.ai-hero-in{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+.ai-badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ember-lt);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.ai-badge::before{content:'';width:6px;height:6px;background:var(--ember);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+.ai-h{font-family:var(--serif);font-size:clamp(26px,3.2vw,42px);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-.02em;margin-bottom:16px;}
+.ai-h em{font-style:italic;font-weight:400;color:var(--ember-lt);}
+.ai-p{font-size:15px;color:rgba(255,255,255,.6);line-height:1.82;margin-bottom:20px;}
+.ai-honest{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-left:3px solid var(--ember);padding:16px 18px;border-radius:0 4px 4px 0;}
+.ai-honest p{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.72;}
+.ai-honest strong{color:rgba(255,255,255,.85);}
+.ai-right-cards{display:flex;flex-direction:column;gap:12px;}
+.ai-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:20px 22px;}
+.ai-card-t{font-family:var(--serif);font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;}
+.ai-card-b{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;}
+.ai-card-status{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ember-lt);margin-bottom:7px;}
+
+/* AI 4 LAYERS */
+.ai-layers{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:36px;}
+.al{background:var(--white);padding:28px 24px;transition:background .2s;}
+.al:hover{background:var(--linen);}
+.al-num{font-family:var(--serif);font-size:38px;font-weight:700;color:var(--clay);line-height:1;margin-bottom:10px;}
+.al-phase{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember);margin-bottom:6px;}
+.al-t{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.al-b{font-size:13px;color:var(--ink-soft);line-height:1.75;}
+.al-status{font-family:var(--mono);font-size:9px;padding:3px 9px;border-radius:2px;display:inline-block;margin-top:10px;}
+.al-live{background:rgba(212,87,26,.1);color:var(--ember);border:1px solid rgba(212,87,26,.25);}
+.al-wip{background:rgba(29,50,80,.08);color:var(--slate);border:1px solid rgba(29,50,80,.2);}
+.al-future{background:var(--linen);color:var(--ink-pale);border:1px solid var(--rule);}
+
+/* DIGITAL TWIN */
+.dt-g{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;margin-bottom:36px;}
+.dt-t p{font-size:15px;color:var(--ink-soft);line-height:1.9;margin-bottom:16px;}
+.dt-t strong{color:var(--ink);font-weight:600;}
+.dt-t em{font-style:italic;}
+.dt-right{display:flex;flex-direction:column;gap:1px;}
+.dt-row{background:var(--white);border:1px solid var(--rule);padding:20px 22px;transition:transform .2s;}
+.dt-row:hover{transform:translateX(4px);}
+.dt-row-l{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember);margin-bottom:5px;}
+.dt-row-t{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.dt-row-b{font-size:13px;color:var(--ink-soft);line-height:1.68;}
+
+/* MULTI PROPERTY */
+.mp-sec{background:var(--linen);border-top:1px solid var(--rule);}
+.mp-ig{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-bottom:44px;}
+.mp-t p{font-size:15.5px;color:var(--ink-soft);line-height:1.9;margin-bottom:18px;}
+.mp-t strong{color:var(--ink);font-weight:600;}
+.mp-t em{font-style:italic;}
+.mp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:28px;}
+.mc{background:var(--white);padding:28px 24px;transition:background .2s;}
+.mc:hover{background:var(--parchment);}
+.mc-s{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);margin-bottom:9px;}
+.mc-t{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:9px;}
+.mc-b{font-size:13.5px;color:var(--ink-soft);line-height:1.78;}
+.mc-dk{background:var(--ink);}
+.mc-dk:hover{background:var(--slate);}
+.mc-dk .mc-s{color:var(--ember-lt);}
+.mc-dk .mc-t{color:#fff;}
+.mc-dk .mc-b{color:rgba(255,255,255,.52);}
+
+/* PROOF */
+.proof-sec{border-top:1px solid var(--rule);}
+.proof-g{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:36px;}
+.pgc{background:var(--white);padding:28px 24px;transition:background .2s;}
+.pgc:hover{background:var(--parchment);}
+.pgc-n{font-family:var(--serif);font-size:42px;font-weight:700;color:var(--ember);line-height:1;margin-bottom:7px;}
+.pgc-l{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-pale);margin-bottom:9px;}
+.pgc-d{font-size:13px;color:var(--ink-soft);line-height:1.65;}
+.pgc-c{font-size:11px;color:var(--ink-pale);margin-top:7px;font-style:italic;}
+.sc-g{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.sc{background:var(--white);border:1px solid var(--rule);padding:30px;border-radius:4px;transition:box-shadow .2s;}
+.sc:hover{box-shadow:0 8px 32px rgba(26,22,18,.08);}
+.sc-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember);margin-bottom:11px;display:flex;align-items:center;gap:6px;}
+.sc-tag::before{content:'';width:6px;height:6px;background:var(--ember);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+.sc-t{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--ink);margin-bottom:11px;line-height:1.3;}
+.sc-b{font-size:14px;color:var(--ink-soft);line-height:1.8;margin-bottom:18px;}
+.sc-li{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.sc-li li{font-size:13px;color:var(--ink-soft);display:flex;align-items:flex-start;gap:7px;line-height:1.55;}
+.sc-li li::before{content:'→';color:var(--ember);flex-shrink:0;font-size:10px;margin-top:2px;}
+
+/* HOW */
+.how-sec{background:var(--linen);border-top:1px solid var(--rule);}
+.how-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:36px;}
+.hc{background:var(--white);padding:34px 28px;}
+.hc-n{font-family:var(--serif);font-size:50px;font-weight:700;color:var(--clay);line-height:1;margin-bottom:11px;}
+.hc-t{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--ink);margin-bottom:9px;}
+.hc-b{font-size:14px;color:var(--ink-soft);line-height:1.8;}
+.hc-note{font-size:12px;color:var(--ember);font-family:var(--mono);margin-top:13px;letter-spacing:.05em;}
+
+/* PEOPLE */
+.ppl-sec{border-top:1px solid var(--rule);}
+.ppl-g{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.pcard{background:var(--white);border:1px solid var(--rule);border-radius:4px;overflow:hidden;transition:box-shadow .25s;}
+.pcard:hover{box-shadow:0 12px 48px rgba(26,22,18,.1);}
+.pcard-top{background:var(--linen);padding:30px 30px 0;display:flex;gap:22px;align-items:flex-end;}
+.pphoto{width:88px;height:108px;border-radius:4px 4px 0 0;overflow:hidden;flex-shrink:0;border:1px solid var(--rule);border-bottom:none;display:flex;align-items:center;justify-content:center;}
+.pphoto img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;}
+.pph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:38px;font-weight:700;color:#fff;}
+.pcard-intro{padding-bottom:18px;}
+.prole{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ember);margin-bottom:5px;}
+.pname{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:5px;}
+.p1l{font-size:13px;color:var(--ink-mid);font-style:italic;}
+.pcard-body{padding:26px 30px 30px;}
+.pbio{font-size:14px;color:var(--ink-soft);line-height:1.85;margin-bottom:18px;}
+.ptags{display:flex;flex-wrap:wrap;gap:6px;}
+.ptag{font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--rule);color:var(--ink-mid);border-radius:2px;}
+.ptag-e{border-color:rgba(212,87,26,.25);color:var(--ember);}
+
+/* LOCATIONS */
+.loc-sec{background:var(--linen);border-top:1px solid var(--rule);}
+.loc-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.loccard{background:var(--white);border:1px solid var(--rule);padding:30px;border-radius:4px;}
+.loc-st{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-pale);margin-bottom:7px;display:flex;align-items:center;gap:6px;}
+.loc-st.act{color:var(--ember);}
+.loc-st.act::before{content:'';width:5px;height:5px;background:var(--ember);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+.loc-city{font-family:var(--serif);font-size:30px;font-weight:700;color:var(--ink);margin-bottom:5px;line-height:1;}
+.loc-ctry{font-size:13px;color:var(--ink-pale);margin-bottom:18px;padding-bottom:15px;border-bottom:1px solid var(--rule);}
+.loc-bd{font-size:13.5px;color:var(--ink-soft);line-height:1.78;}
+
+/* ECOSYSTEM */
+.eco-sec{border-top:1px solid var(--rule);}
+.eco-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.ecard{background:var(--white);border:1px solid var(--rule);padding:28px;border-radius:4px;transition:box-shadow .2s;}
+.ecard:hover{box-shadow:0 6px 24px rgba(26,22,18,.07);}
+.et{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ember);margin-bottom:9px;}
+.en{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.etl{font-style:italic;font-size:13px;color:var(--ink-mid);margin-bottom:13px;padding-bottom:13px;border-bottom:1px solid var(--rule);}
+.eb{font-size:13.5px;color:var(--ink-soft);line-height:1.78;}
+.el{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ember);text-decoration:none;margin-top:13px;font-weight:500;transition:gap .2s;}
+.el:hover{gap:9px;}
+
+/* CTA */
+.cta-sec{background:var(--ink);padding:92px 40px;border-top:3px solid var(--ember);}
+.cta-in{max-width:960px;margin:0 auto;text-align:center;}
+.cta-eye{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(212,87,26,.68);margin-bottom:15px;}
+.cta-h{font-family:var(--serif);font-size:clamp(28px,3.8vw,48px);font-weight:700;color:#fff;line-height:1.15;margin-bottom:18px;letter-spacing:-.02em;}
+.cta-h em{font-style:italic;font-weight:400;color:var(--ember-lt);}
+.cta-p{font-size:16px;color:rgba(255,255,255,.5);line-height:1.8;max-width:540px;margin:0 auto 32px;}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.cta-bp{background:var(--ember);color:#fff;padding:14px 32px;border-radius:2px;text-decoration:none;font-size:14.5px;font-weight:500;transition:background .2s;}
+.cta-bp:hover{background:var(--ember-lt);}
+
+/* FOOTER */
+footer{background:var(--linen);border-top:1px solid var(--rule);padding:48px 40px 26px;}
+.fi{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;padding-bottom:36px;border-bottom:1px solid var(--rule);}
+.fi img{height:32px;margin-bottom:11px;display:block;}
+.fd{font-size:13px;color:var(--ink-pale);line-height:1.75;max-width:270px;margin-bottom:14px;}
+.fl-c{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-pale);}
+.ft{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-pale);margin-bottom:13px;}
+.fl{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.fl a{font-size:13.5px;color:var(--ink-soft);text-decoration:none;transition:color .2s;}
+.fl a:hover{color:var(--ember);}
+.fb{max-width:1280px;margin:20px auto 0;display:flex;justify-content:space-between;align-items:flex-start;gap:28px;}
+.fc{font-family:var(--mono);font-size:10px;letter-spacing:.07em;color:var(--ink-pale);white-space:nowrap;}
+.fdisc{font-size:10.5px;color:var(--ink-pale);max-width:640px;text-align:right;line-height:1.7;}
+
+/* ANIMATIONS */
+@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.rv.in{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.08s;}.rd2{transition-delay:.16s;}.rd3{transition-delay:.24s;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .hero,.story-g,.lc-intro,.msr-g,.mp-ig,.dt-g,.ai-hero-in{grid-template-columns:1fr;gap:36px;}
+  .ls{grid-template-columns:56px 1fr;} .ls-kpi{display:none;}
+  .proof-g{grid-template-columns:repeat(2,1fr);}
+  .ai-layers{grid-template-columns:repeat(2,1fr);}
+  .fi{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  nav{padding:0 20px;} .nl{display:none;}
+  .sec,.hero{padding:76px 20px 56px;}
+  .ls{grid-template-columns:1fr;} .ls-idx{display:none;}
+  .mp-cards,.prev-g,.how-g,.ppl-g,.loc-g,.eco-g,.sc-g,.ai-layers{grid-template-columns:1fr;}
+  .kt{grid-template-columns:1fr;} .kt-l{border-right:none;border-bottom:1px solid var(--rule);}
+  .loop-steps{grid-template-columns:repeat(3,1fr);gap:14px;} .loop-steps::after{display:none;}
+  .fi{grid-template-columns:1fr 1fr;gap:22px;}
+}
+
+/* ════════ STYLEGUIDE RESKIN OVERRIDES ════════ */
+body{font-size:16px;line-height:1.55;font-feature-settings:'ss01','cv11';background:#fdfdfd;}
+body::after{display:none;}                 /* drop the warm paper-noise overlay for clean surfaces */
+::-webkit-scrollbar-thumb{border-radius:9999px;}
+
+/* Headings render in the Inter Tight display face; italic accents switch to Instrument Serif */
+.nb-t,.h-h1,.sh,.ls-t,.kt-n,.loop-t,.al-t,.pc-t,.mc-t,.sc-t,.hc-t,.pname,.loc-city,.en,
+.cta-h,.ai-h,.wc-t,.dt-row-t{letter-spacing:-.025em;}
+.h-h1,.sh,.cta-h,.ai-h{letter-spacing:-.035em;line-height:1.04;}
+.h-h1 em,.sh em,.cta-h em,.ai-h em{font-family:var(--accent-serif);font-weight:400;font-style:italic;letter-spacing:-.01em;}
+.fn-body,.pull,.mpull,.fn::before{font-family:var(--accent-serif);}
+.fn-body{font-size:17px;line-height:1.7;}
+.pull,.mpull{font-size:21px;line-height:1.5;}
+
+/* Big faded numerals pick up the soft-heat tone from the styleguide */
+.ls-n,.hc-n,.al-num,.pgc-n{font-family:var(--serif);}
+
+/* Buttons → styleguide pill radius + heat glow */
+.bp,.cta-bp{border-radius:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(242,102,37,.3),0 4px 16px rgba(242,102,37,.2);}
+.bp:hover,.cta-bp:hover{background:var(--ember-dk);}
+.bg,.bgw,.n-cta{border-radius:10px;}
+.n-cta{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 4px 16px rgba(242,102,37,.18);}
+
+/* Soften standalone surfaces to the 12–16px radius scale */
+.fn{border-radius:16px;box-shadow:0 4px 24px rgba(10,10,10,.05);}
+.h-box,.callout,.ai-honest{border-radius:0 12px 12px 0;}
+.loop-card,.ai-hero,.ai-card,.sc,.pcard,.loccard,.ecard,.lc-map{border-radius:14px;}
+.wc,.dt-row{border-radius:10px;}
+.ki,.ptag,.al-status{border-radius:9999px;}
+
+/* Nav: taller, crisper, blurred like the styleguide header.
+   Bar is full-bleed; its content is capped to the page container width (matches .si / footer .fi). */
+nav{height:64px;padding:0 !important;display:block;background:rgba(253,253,253,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.nav-inner{max-width:1280px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 40px;}
+@media(max-width:768px){.nav-inner{padding:0 20px;}}
+.nb img{display:none;} .nb-t{display:block !important;}   /* use the wordmark, no missing-logo gap */
+
+/* Focus ring matches the system */
+a:focus-visible,button:focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:8px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nb">
+    <img src="RedRiver_Logo.png" alt="Red River One" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="nb-t" style="display:none">Red River <span>One</span></span>
+  </a>
+  <ul class="nl">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#lifecycle">Tenant Lifecycle</a></li>
+    <li><a href="#measurement">Measurement</a></li>
+    <li><a href="#how">How We Work</a></li>
+  </ul>
+  <a href="#contact" class="n-cta">Let's Talk →</a>
+  </div>
+</nav>
+
+
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-t">
+    <span class="mq-i">Find Tenants <span>—</span></span><span class="mq-i">Screen &amp; Qualify <span>—</span></span><span class="mq-i">Lease &amp; Onboard <span>—</span></span><span class="mq-i">Maintain &amp; Repair <span>—</span></span><span class="mq-i">Retain &amp; Renew <span>—</span></span><span class="mq-i">Turn &amp; Re-List <span>—</span></span><span class="mq-i">Measure Everything <span>—</span></span><span class="mq-i">Prevent Problems <span>—</span></span><span class="mq-i">AI-Ready Data <span>—</span></span><span class="mq-i">Digital Twins <span>—</span></span>
+    <span class="mq-i">Find Tenants <span>—</span></span><span class="mq-i">Screen &amp; Qualify <span>—</span></span><span class="mq-i">Lease &amp; Onboard <span>—</span></span><span class="mq-i">Maintain &amp; Repair <span>—</span></span><span class="mq-i">Retain &amp; Renew <span>—</span></span><span class="mq-i">Turn &amp; Re-List <span>—</span></span><span class="mq-i">Measure Everything <span>—</span></span><span class="mq-i">Prevent Problems <span>—</span></span><span class="mq-i">AI-Ready Data <span>—</span></span><span class="mq-i">Digital Twins <span>—</span></span>
+  </div>
+</div>
+
+
+<!-- ═══════════════ STORY ═══════════════ -->
+<section class="sec story-sec" id="story">
+  <div class="si">
+    <div class="story-g">
+      <div class="st rv">
+        <div class="eye">The Story</div>
+        <h2 class="sh" style="margin-bottom:26px">We're not trying to be everything.<br><em>Just very good at this one thing.</em></h2>
+        <p>The founding idea behind Red River One was simple: <strong>most real estate problems aren't real estate problems. They're operations problems.</strong> A property underperforms not usually because of location or market — but because nobody standardized the maintenance workflows, nobody tracks vendor performance, and the monthly lender report is a one-page rent roll that hides everything important.</p>
+        <div class="pull">"The gap between how good properties <em>are</em> run and how good they <em>could</em> be run is almost always an infrastructure problem — not a talent one."</div>
+        <p>Anand built workforce development platforms in Texas. The conviction carried into Red River One is that <strong>complex, high-stakes operations can be standardized without losing humanity.</strong></p>
+        <p>Real estate is the next domain. Massive asset class, largely managed informally, and a growing appetite from capital for properties that demonstrate operational discipline. <em>We started with two buildings in Austin. We're getting it right there before going anywhere else.</em></p>
+      </div>
+      <div class="rv rd2" style="padding-top:6px;">
+        <div class="wwd">
+          <div class="wc">
+            <div class="wc-n">01 — Operations</div>
+            <div class="wc-t">We rebuild how your property runs — end to end</div>
+            <div class="wc-b">From the moment a prospective tenant sees your listing to the day they move out, every touchpoint has a defined process, a clear owner, and a way to measure whether it worked.</div>
+          </div>
+          <div class="wc">
+            <div class="wc-n">02 — Reporting</div>
+            <div class="wc-t">Numbers your capital partners will actually trust</div>
+            <div class="wc-b">Accurate reports — with variance narratives, honest KPIs, and the kind of transparency that turns a lender meeting into a conversation, not a defense.</div>
+          </div>
+          <div class="wc">
+            <div class="wc-n">03 — Intelligence</div>
+            <div class="wc-t">Clean data today. AI capability tomorrow.</div>
+            <div class="wc-b">Automation, anomaly detection, digital twins. This layer only works when the foundation is clean. We build toward it deliberately — so when it runs, it runs on real data, not noise.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ TENANT LIFECYCLE ═══════════════ -->
+<section class="sec lc-sec" id="lifecycle">
+  <div class="si">
+    <div class="eye rv">The Full Picture</div>
+    <h2 class="sh rv">Every stage of a tenant's life<br><em>with your property, managed properly.</em></h2>
+
+    <div class="lc-intro">
+      <div class="rv">
+        <p>A tenant isn't a unit on a spreadsheet. They're a person who chose your property, pays you every month, and whose experience determines whether they stay, refer a friend, or quietly leave at renewal. <strong>Every stage of that relationship is an opportunity to build goodwill — or erode it.</strong></p>
+        <p>Most property managers focus on occupancy. We focus on the full arc — from the first listing impression to the day the unit is turned and ready for the next resident. We've mapped every stage, defined what good looks like, and built the workflows to get there consistently.</p>
+        <p><em>This isn't a brochure</em> — it's the actual process we run at our Austin properties, with the specific metrics we track at each stage. If you want to see the raw data, email us.</p>
+      </div>
+      <div class="lc-map rv rd2">
+        <div class="lc-map-t">Tenant Lifecycle — 8 Stages</div>
+        <div class="lc-row"><div class="lc-dot d-e"></div><span class="lc-rn">01 — Marketing &amp; Lead Generation</span><span class="lc-rs">Pre-Lease</span></div>
+        <div class="lc-row"><div class="lc-dot d-e"></div><span class="lc-rn">02 — Showings &amp; Applications</span><span class="lc-rs">Pre-Lease</span></div>
+        <div class="lc-row"><div class="lc-dot d-e"></div><span class="lc-rn">03 — Screening &amp; Approval</span><span class="lc-rs">Pre-Lease</span></div>
+        <div class="lc-row"><div class="lc-dot d-s"></div><span class="lc-rn">04 — Move-In &amp; Onboarding</span><span class="lc-rs">Active</span></div>
+        <div class="lc-row"><div class="lc-dot d-s"></div><span class="lc-rn">05 — Maintenance &amp; Vendors</span><span class="lc-rs">Active</span></div>
+        <div class="lc-row"><div class="lc-dot d-s"></div><span class="lc-rn">06 — Retention &amp; Renewal</span><span class="lc-rs">Active</span></div>
+        <div class="lc-row"><div class="lc-dot d-p"></div><span class="lc-rn">07 — Move-Out &amp; Deposit</span><span class="lc-rs">Transition</span></div>
+        <div class="lc-row"><div class="lc-dot d-p"></div><span class="lc-rn">08 — Unit Turn &amp; Make-Ready</span><span class="lc-rs">Transition</span></div>
+      </div>
+    </div>
+
+    <div class="lcs rv">
+      <!-- STEP 01 -->
+      <div class="ls">
+        <div class="ls-idx"><div class="ls-n">01</div><div class="ls-dot"></div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Pre-Lease · Finding Tenants</div>
+          <div class="ls-t">Marketing &amp; Lead Generation</div>
+          <div class="ls-b">Before a single application arrives, we want to know exactly where leads come from — and which sources are worth paying for. Listing quality, photo standards, and response time all affect conversion in ways that only show up when you're actually measuring them.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Consistent listings across all platforms with standardized photography and copy</div>
+            <div class="ls-task">Every inquiry acknowledged within 2 hours — tracked, not assumed</div>
+            <div class="ls-task">Source tagging at entry: every lead marked so we know what's working</div>
+            <div class="ls-task">Waitlist management for high-demand units — no vacancy sits unmanaged</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Lead-to-Tour Rate</div><div class="km-d">% of inquiries that become showings — signals listing quality and response speed</div></div>
+          <div class="km"><div class="km-n">Days on Market</div><div class="km-d">Listing-live to signed application, per unit, benchmarked to local market</div></div>
+          <div class="km"><div class="km-n">Lead Source Quality Score</div><div class="km-d">Which channel produces the best tenants at the lowest cost-to-lease</div></div>
+        </div>
+      </div>
+      <!-- STEP 02 -->
+      <div class="ls">
+        <div class="ls-idx"><div class="ls-n">02</div><div class="ls-dot"></div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Pre-Lease · Conversion</div>
+          <div class="ls-t">Showings &amp; Applications</div>
+          <div class="ls-b">A showing is the first real impression. The unit should be clean, the agent prepared, and the follow-up same-day — not when someone remembers. Tour-to-application conversion is one of the most controllable numbers in property management, and one of the most neglected.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Unit showing checklist completed before every tour — lights, HVAC, cleanliness, all fixtures working</div>
+            <div class="ls-task">Same-day follow-up to every prospective tenant who toured, regardless of outcome</div>
+            <div class="ls-task">Application process simplified — every unnecessary step costs a conversion</div>
+            <div class="ls-task">Cancelled showings tracked and root-caused: time of day, listing quality, or price?</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Tour-to-Application Rate</div><div class="km-d">Clearest signal of leasing effectiveness — if low, it's the unit, price, or experience</div></div>
+          <div class="km"><div class="km-n">Application-to-Approval Rate</div><div class="km-d">Tracks criteria alignment; too high or too low both signal something to fix</div></div>
+          <div class="km"><div class="km-n">Follow-Up Compliance %</div><div class="km-d">% of tours with same-day follow-up — a discipline metric, not a result one</div></div>
+        </div>
+      </div>
+      <!-- STEP 03 -->
+      <div class="ls">
+        <div class="ls-idx"><div class="ls-n">03</div><div class="ls-dot"></div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Pre-Lease · Risk &amp; Compliance</div>
+          <div class="ls-t">Screening &amp; Approval</div>
+          <div class="ls-b">Screening isn't just risk management — it's the beginning of the tenant relationship. Written, consistently applied criteria mean every decision is defensible, every applicant treated fairly, and no one is exposed to fair housing liability from ad-hoc judgment calls.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Written criteria applied uniformly: income ratio, credit thresholds, rental history, background — defined in advance</div>
+            <div class="ls-task">Decision timeline published; no application unanswered beyond 48 hours</div>
+            <div class="ls-task">Adverse action notices handled correctly and on time — legal requirement, tracked to the day</div>
+            <div class="ls-task">All approvals and denials documented with reason codes for the audit trail</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Approval Consistency Score</div><div class="km-d">Are decisions tracking against stated criteria, or drifting? Drift creates legal exposure.</div></div>
+          <div class="km"><div class="km-n">Decision Turnaround Time</div><div class="km-d">Hours from complete application to decision — delays lose qualified applicants</div></div>
+          <div class="km"><div class="km-n">Adverse Action Compliance</div><div class="km-d">100% is the only acceptable number. We track it as such.</div></div>
+        </div>
+      </div>
+      <!-- STEP 04 dark -->
+      <div class="ls ls-dk">
+        <div class="ls-idx"><div class="ls-n">04</div><div class="ls-dot"></div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Active Tenancy · Day One</div>
+          <div class="ls-t">Move-In &amp; Onboarding</div>
+          <div class="ls-b">Move-in day is the moment a tenant decides whether they made the right choice. A smooth, organized, welcoming onboarding builds goodwill that carries through the entire tenancy. A disorganized one starts a relationship with a deficit — and tenants remember it at renewal time.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Unit inspection completed and documented with photos before keys are handed over</div>
+            <div class="ls-task">Move-in condition report signed by both parties — the baseline that protects everyone at move-out</div>
+            <div class="ls-task">Welcome packet with emergency contacts, maintenance process, community rules — in writing, not verbally</div>
+            <div class="ls-task">30-day check-in call scheduled at move-in day. Proactive. The cheapest retention investment we make.</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Move-In Readiness Score</div><div class="km-d">Was the unit 100% ready on day one? Checked against a defined checklist, not a feeling.</div></div>
+          <div class="km"><div class="km-n">Documentation Completeness</div><div class="km-d">Signed move-in report, executed lease, utility transfer — all on file before keys go out</div></div>
+          <div class="km"><div class="km-n">30-Day Check-In Rate</div><div class="km-d">% of new tenants who got their first proactive check-in. Tracked weekly.</div></div>
+        </div>
+      </div>
+      <!-- STEP 05 dark -->
+      <div class="ls ls-dk">
+        <div class="ls-idx"><div class="ls-n">05</div><div class="ls-dot"></div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Active Tenancy · Day-to-Day</div>
+          <div class="ls-t">Maintenance &amp; Vendor Management</div>
+          <div class="ls-b">Maintenance is where most property management falls apart — and where tenants form their lasting opinion. It's not just about fixing things. It's about communicating clearly, following up, and making people feel heard. We treat every work order as a relationship touchpoint, not just a task in a queue.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Every request logged on receipt — no verbal approvals, no informal group-chat fixes, no exceptions</div>
+            <div class="ls-task">Tenant notified at each stage: received → assigned → scheduled → completed</div>
+            <div class="ls-task">Vendor dispatch tied to qualification criteria — not just whoever picks up the phone</div>
+            <div class="ls-task">Photo verification required before any work order is closed — proof of completion, not trust</div>
+            <div class="ls-task">Preventive maintenance calendar: HVAC filters, gutters, pest control — scheduled ahead of failure</div>
+            <div class="ls-task">Vendor scorecards updated monthly: response time, callback rate, cost vs. estimate, tenant feedback</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Work Order SLA Compliance</div><div class="km-d">Emergency: 4hr. Urgent: 24hr. Routine: 5 days. Every ticket rated against these benchmarks.</div></div>
+          <div class="km"><div class="km-n">Vendor Callback Rate</div><div class="km-d">How often does a "completed" job return? High rate = wrong vendor or wrong scope. Both fixable.</div></div>
+          <div class="km"><div class="km-n">Preventive vs. Reactive Ratio</div><div class="km-d">Are we fixing things before they break, or after? The ratio shows how far ahead we're operating.</div></div>
+        </div>
+      </div>
+      <!-- STEP 06 dark -->
+      <div class="ls ls-dk">
+        <div class="ls-idx"><div class="ls-n">06</div><div class="ls-dot"></div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Active Tenancy · Relationship</div>
+          <div class="ls-t">Retention &amp; Renewal</div>
+          <div class="ls-b">Keeping a good tenant is almost always cheaper than finding a new one. The cost of a vacancy — lost rent, turn costs, leasing time — can run $2,000–$5,000 per unit. Most properties wait until 60 days before lease end to have the renewal conversation. By then, the tenant has already decided. We start 120 days out — and we watch for the signals that predict a non-renewal before the tenant says a word.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Renewal outreach starts 120 days before expiry — not 60. Earlier contact produces higher renewal rates.</div>
+            <div class="ls-task">Satisfaction check-in at 90 days: open issues resolved before the renewal offer goes out</div>
+            <div class="ls-task">Renewal offers personalised — not a generic form letter with a rent increase attached</div>
+            <div class="ls-task">Non-renewal reasons categorised: price, condition, service, or life change. Each needs a different response.</div>
+            <div class="ls-task">Early warning signals tracked: late payments, maintenance complaint frequency, reduced portal activity</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Renewal Rate</div><div class="km-d">% of eligible tenants who renew. Goal: understand every non-renewal, not just count them.</div></div>
+          <div class="km"><div class="km-n">First Contact Lead Time</div><div class="km-d">Days before expiry of first renewal touchpoint. Earlier is consistently better.</div></div>
+          <div class="km"><div class="km-n">Non-Renewal Root Cause Mix</div><div class="km-d">Categorised so we act on what's within our control — not just accept the loss.</div></div>
+        </div>
+      </div>
+      <!-- STEP 07 -->
+      <div class="ls">
+        <div class="ls-idx"><div class="ls-n">07</div><div class="ls-dot"></div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Transition · Departure</div>
+          <div class="ls-t">Move-Out &amp; Security Deposit</div>
+          <div class="ls-b">Move-out is where legal exposure is highest and relationships most fragile. It's also where sloppy record-keeping from move-in comes back to haunt you. We run a tight, documented process — because it's right, and because the alternative is disputes, bad reviews, and sometimes litigation.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Move-out instructions sent 60 days before departure — no surprises about expectations or cleaning standards</div>
+            <div class="ls-task">Move-out inspection within 24 hours of key return, with full photo documentation of every room</div>
+            <div class="ls-task">Move-in condition report used as baseline — every charge reconciled against documented pre-existing condition</div>
+            <div class="ls-task">Deposit itemised and returned within statutory deadline — tracked to the day, no exceptions</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Deposit Return Compliance</div><div class="km-d">% returned within statutory deadline. Legal requirement — we treat it as a discipline metric.</div></div>
+          <div class="km"><div class="km-n">Deposit Dispute Rate</div><div class="km-d">Disputes signal poor move-in documentation or unjustified charges. Both preventable.</div></div>
+          <div class="km"><div class="km-n">Charge Substantiation Rate</div><div class="km-d">% of deductions backed by evidence from both inspections. 100% is the target.</div></div>
+        </div>
+      </div>
+      <!-- STEP 08 -->
+      <div class="ls">
+        <div class="ls-idx"><div class="ls-n">08</div><div class="ls-dot"></div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Transition · Reset</div>
+          <div class="ls-t">Unit Turn &amp; Make-Ready</div>
+          <div class="ls-b">Every day a unit sits vacant after move-out is money out of the owner's pocket. Turn time is one of the highest-ROI levers in multifamily — and one of the most ignored. We treat each turn like a small construction project: scoped in advance, scheduled tightly, tracked against a hard completion date.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Turn scope finalised within 48 hours of move-out inspection — no waiting to "walk it again"</div>
+            <div class="ls-task">Make-ready checklist covers every system: HVAC, plumbing, appliances, paint, flooring, fixtures, deep clean</div>
+            <div class="ls-task">Vendor scheduling coordinated in sequence — no trades sitting idle waiting on each other</div>
+            <div class="ls-task">Target move-in date set at turn start; every day of overrun tracked and root-caused, not accepted</div>
+            <div class="ls-task">Re-inspection before keys go out — the next tenant's move-in report is the final quality check on the turn</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Turn Time (Days)</div><div class="km-d">Move-out to move-in-ready. Every day counts. Tracked per unit, trended over time.</div></div>
+          <div class="km"><div class="km-n">Turn Cost vs. Budget</div><div class="km-d">Scope defined upfront, actuals compared at close. Variance investigated, not silently accepted.</div></div>
+          <div class="km"><div class="km-n">Make-Ready Pass Rate</div><div class="km-d">% of units that pass re-inspection on first attempt — quality indicator for the turn process itself.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout rv">
+      <p><strong>These eight stages are a loop, not a line.</strong> The quality of each turn shapes the next move-in experience. That experience shapes whether the tenant maintains well, renews, and refers. Good operations compound — but only if every stage is actually managed and measured. Miss one consistently, and the rest quietly degrades.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ MEASUREMENT / GIGO ═══════════════ -->
+<section class="sec msr-sec" id="measurement">
+  <div class="si">
+    <div class="eye rv">How We Measure</div>
+    <h2 class="sh rv">Garbage In, Garbage Out.<br><em>So we're obsessive about the inputs.</em></h2>
+
+    <div class="msr-g">
+      <div class="msr-t rv">
+        <p>We've seen a lot of property dashboards. They look impressive — charts, trend lines, occupancy percentages. And then you ask: <strong>where does that number actually come from?</strong> The honest answer is usually "it's what the property manager entered into the system."</p>
+        <div class="mpull">A KPI built on unmeasured activity isn't a metric. It's a guess in a spreadsheet wearing a suit.</div>
+        <p>We built our measurement approach around one principle: <em>we only report what we can directly trace to a logged event.</em> A work order is closed when a photo is uploaded and reviewed — not when someone marks it done. A unit is vacant when it's recorded with a date stamp — not when someone updates the whiteboard. A vendor is paid when the invoice matches the approved scope and the work is verified — not when someone says it looks fine.</p>
+        <p><strong>This sounds obvious. Almost nobody does it.</strong> The reason most property KPIs are unreliable is that underlying data is entered manually, inconsistently, and often after the fact. Our job is to build systems where data captures itself — so by the time a metric appears in a report, it reflects something that actually happened.</p>
+        <p>We're honest about where we stand. We're 12 months in. Our metrics are improving, not perfect. But we can show you exactly how each one is calculated, what its data source is, and what confidence level we'd put on it. <em>That's a higher bar than most operators hold themselves to — and it's the only foundation that makes AI and digital twins actually useful.</em></p>
+      </div>
+      <div class="rv rd2">
+        <div class="loop-card">
+          <div class="loop-t">The Measurement Loop</div>
+          <div class="loop-s">Every metric feeds a decision. Every decision changes an action. Every action produces new data. This is how you prevent problems instead of react to them.</div>
+          <div class="loop-steps">
+            <div class="lstep"><div class="ld">M</div><div class="ln">Measure</div><div class="ld-d">Log at source</div></div>
+            <div class="lstep"><div class="ld">A</div><div class="ln">Analyse</div><div class="ld-d">Find patterns</div></div>
+            <div class="lstep"><div class="ld">F</div><div class="ln">Flag</div><div class="ld-d">Surface anomalies</div></div>
+            <div class="lstep"><div class="ld">A</div><div class="ln">Act</div><div class="ld-d">Named owner, specific action</div></div>
+            <div class="lstep"><div class="ld">P</div><div class="ln">Prevent</div><div class="ld-d">Problem doesn't recur</div></div>
+          </div>
+        </div>
+        <div class="callout" style="margin-bottom:0">
+          <p><strong>Our KPI policy:</strong> We don't include a metric in any report unless we can trace it to a primary source event. We don't round numbers to look better. We don't average over a period to hide a bad month. And when a metric is in progress — like our unit turn time data — we say so clearly.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="rv" style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em;">Three KPI Tiers. Each with a Specific Job.</h3>
+    <p class="rv" style="font-size:14px;color:var(--ink-soft);line-height:1.8;max-width:680px;margin-bottom:24px;">Not all metrics need the same cadence. Some tell you whether today is going well. Others tell you whether next quarter will.</p>
+    <div class="kpi-tiers rv">
+      <div class="kt">
+        <div class="kt-l"><div class="kt-n">Tier 1<br>Operational Health</div><div class="kt-s">Daily / Weekly</div></div>
+        <div class="kt-b">
+          <p>Discipline metrics — are basic processes being followed? Not exciting. Essential. If these aren't green, nothing above them means anything.</p>
+          <div class="ki-wrap">
+            <span class="ki ki-e">Work Order SLA Compliance %</span><span class="ki ki-e">Open Work Orders by Age</span><span class="ki ki-e">Inquiry Response Time</span><span class="ki ki-e">Rent Collection Rate</span><span class="ki ki-e">Late Payment Count</span><span class="ki ki-e">Vendor Response Time</span><span class="ki ki-e">Make-Ready Status by Unit</span>
+          </div>
+        </div>
+      </div>
+      <div class="kt">
+        <div class="kt-l"><div class="kt-n">Tier 2<br>Financial Performance</div><div class="kt-s">Monthly</div></div>
+        <div class="kt-b">
+          <p>These go into the lender package and investor update. They need to be accurate before being shared — not estimated, not rounded. These numbers build or destroy credibility with capital.</p>
+          <div class="ki-wrap">
+            <span class="ki ki-s">NOI vs. Budget Variance</span><span class="ki ki-s">Gross Revenue vs. Pro Forma</span><span class="ki ki-s">Operating Expense Ratio</span><span class="ki ki-s">Economic Occupancy</span><span class="ki ki-s">Capex vs. Plan</span><span class="ki ki-s">Rent Leakage</span><span class="ki ki-s">Vendor Cost Variance</span>
+          </div>
+        </div>
+      </div>
+      <div class="kt">
+        <div class="kt-l"><div class="kt-n">Tier 3<br>Trend &amp; Prevention</div><div class="kt-s">Quarterly</div></div>
+        <div class="kt-b">
+          <p>Where patterns become strategy — looking for things about to become problems, not things already broken. These feed the prevention playbook for next quarter.</p>
+          <div class="ki-wrap">
+            <span class="ki">Renewal Rate Trend</span><span class="ki">Non-Renewal Root Cause Mix</span><span class="ki">Vendor Callback Rate (90d)</span><span class="ki">Lead Source Quality Score</span><span class="ki">Preventive vs. Reactive Ratio</span><span class="ki">Complaints per Unit</span><span class="ki">Turn Time Portfolio Trend</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="rv" style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:10px;letter-spacing:-.01em;">From Measurement to Prevention</h3>
+    <p class="rv" style="font-size:14.5px;color:var(--ink-soft);line-height:1.82;max-width:680px;margin-bottom:26px;">The whole point of measuring is to stop reacting and start anticipating. Here's how specific KPIs translate into specific preventive actions — in the protocols we run at our Austin properties right now.</p>
+    <div class="prev-g rv">
+      <div class="pc"><div class="pc-ico">🔧</div><div class="pc-t">Maintenance Spike Detection</div><div class="pc-b">When work orders for a specific system exceed the 90-day rolling average by 20%+, it triggers a scheduled property inspection before the emergency call happens. We catch the failing compressor before it dies on the hottest day in August.</div></div>
+      <div class="pc"><div class="pc-ico">🏠</div><div class="pc-t">Early Renewal Warning</div><div class="pc-b">Tenants who file more than 2 maintenance complaints in a quarter, or whose portal activity drops, are flagged for a proactive check-in 90 days before lease end. The renewal conversation starts before a decision is made, not after.</div></div>
+      <div class="pc"><div class="pc-ico">📋</div><div class="pc-t">Vendor Performance Gates</div><div class="pc-b">Any vendor with a callback rate above 15% in 30 days goes on review. Two consecutive poor months and they're replaced — on a documented performance record, not instinct.</div></div>
+      <div class="pc"><div class="pc-ico">💰</div><div class="pc-t">Rent Leakage Audit</div><div class="pc-b">Monthly reconciliation between what should have been billed and what was actually charged. Leakage is almost always accidental — a fee waived informally, a charge never entered. We surface it every month.</div></div>
+      <div class="pc"><div class="pc-ico">⏱️</div><div class="pc-t">Turn Time Overrun Response</div><div class="pc-b">If a unit runs more than 3 days over turn target, it triggers daily status checks. Each day of overrun is root-caused: scope creep, vendor delay, or poor scheduling. The answer changes how we plan the next turn.</div></div>
+      <div class="pc"><div class="pc-ico">🎯</div><div class="pc-t">Leasing Source Re-Allocation</div><div class="pc-b">Every quarter we review cost per qualified applicant and lease quality by channel. We shift listing spend toward what's producing good tenants — not just volume. This compounds quietly over time.</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ HOW WE WORK ═══════════════ -->
+<section class="sec how-sec" id="how">
+  <div class="si">
+    <div class="eye rv">How We Work</div>
+    <h2 class="sh rv">We show up, learn the property,<br><em>and fix it in the right order.</em></h2>
+    <p class="sl rv">Good operations come from doing the basics really well, in the right sequence, before adding any complexity.</p>
+    <div class="how-g rv">
+      <div class="hc"><div class="hc-n">01</div><div class="hc-t">Map what exists</div><div class="hc-b">We spend the first 2–4 weeks walking every process: how does a maintenance request actually get handled? Who approves vendor payments? How is the leasing team tracking leads? No judgment — just an honest picture of where things stand, with notes on what's working and what isn't.</div><div class="hc-note">Weeks 1–4 · Diagnostic</div></div>
+      <div class="hc"><div class="hc-n">02</div><div class="hc-t">Rebuild the foundations</div><div class="hc-b">Define workflows across all 8 lifecycle stages, assign owners, set SLAs, establish approval thresholds. Stand up the monthly reporting package. Get every event into the system. Unglamorous work — and the only work that makes everything else possible.</div><div class="hc-note">Months 1–3 · Operations + Reporting</div></div>
+      <div class="hc"><div class="hc-n">03</div><div class="hc-t">Layer in intelligence</div><div class="hc-b">Once operations are clean and reporting is consistent, the data becomes worth something. Anomaly detection, automation, digital twin layers — built on a foundation that supports them. This layer only tells you the truth if the underlying data does too. We don't rush this step.</div><div class="hc-note">Month 3+ · Intelligence &amp; AI Readiness</div></div>
+    </div>
+    <div class="callout rv" style="margin-bottom:0">
+      <p><strong>What 90 days looks like:</strong> A complete operational audit. Structured workflows deployed across the full tenant lifecycle. Your first lender-ready monthly report. A clear picture of where money is being lost or left on the table. And the beginnings of an AI-ready data foundation that will compound in value the longer we operate together.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-sec" id="contact">
+  <div class="cta-in">
+    <div class="cta-eye rv">Work With Us</div>
+    <h2 class="cta-h rv">Have a property that deserves<br><em>to be run better?</em></h2>
+    <p class="cta-p rv">We're selective. We take on properties where we believe we can produce a measurable operational improvement within 90 days — visible change across the full tenant lifecycle, backed by data you can show a lender. If you're a property owner, investor, or operator looking for a genuine systems partner, let's have a real conversation.</p>
+    <div class="cta-btns rv">
+      <a href="mailto:team@redriverone.com" class="cta-bp">Email the Team</a>
+      <a href="#lifecycle" class="bgw">See the Full Lifecycle</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi">
+    <div>
+      <img src="RedRiver_Logo.png" alt="Red River One" onerror="this.style.display='none'">
+      <p class="fd">We manage properties the way they deserve to be managed — every stage of the tenant lifecycle, every metric tracked, every process owned. Building AI-ready operations, one property at a time.</p>
+      <div class="fl-c">Dallas, TX · Mumbai · Managua</div>
+    </div>
+    <div>
+      <div class="ft">Explore</div>
+      <ul class="fl">
+        <li><a href="#story">Our Story</a></li><li><a href="#lifecycle">Tenant Lifecycle</a></li><li><a href="#measurement">How We Measure</a></li><li><a href="#how">How We Work</a></li><li><a href="#contact">Work With Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft">Ecosystem</div>
+      <ul class="fl">
+        <li><a href="#">IT Vision Academy</a></li><li><a href="#">Jansankalp Foundation</a></li><li><a href="#">Axiphyl</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft">Legal</div>
+      <ul class="fl">
+        <li><a href="#">Disclosures</a></li><li><a href="#">Responsible AI</a></li><li><a href="#">Data Governance</a></li><li><a href="#">Press</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb">
+    <div class="fc">© 2026 Red River One LLC — Dallas, Texas, USA</div>
+    <div class="fdisc">Past performance is not indicative of future results. All forward-looking statements are subject to risk and uncertainty. Real estate investments are illiquid and subject to market conditions. Capital at risk — no guarantee of returns is expressed or implied.</div>
+  </div>
+</footer>
+
+
+<script>
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
+}),{threshold:0.05,rootMargin:'0px 0px -18px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+['mp-cards','prev-g','how-g','ppl-g','loc-g','eco-g','sc-g','proof-g','wwd','ai-layers','kpi-tiers'].forEach(c=>{
+  document.querySelectorAll('.'+c).forEach(g=>{
+    Array.from(g.children).forEach((ch,i)=>{ch.style.transitionDelay=(i*52)+'ms';});
+  });
+});
+
+window.addEventListener('scroll',()=>{
+  let cur='';
+  document.querySelectorAll('section[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-90)cur=s.id;});
+  document.querySelectorAll('.nl a').forEach(a=>{ a.style.color=a.getAttribute('href')==='#'+cur?'var(--ember)':''; });
+});
+
+document.querySelectorAll('.pphoto img').forEach(img=>{
+  function fb(){img.style.display='none';const p=img.nextElementSibling;if(p)p.style.display='flex';}
+  img.addEventListener('error',fb);
+  if(img.complete&&img.naturalWidth===0)fb();
+});
+</script>
+</body>
+</html>

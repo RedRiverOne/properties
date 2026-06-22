@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red River One — Property Management That Actually Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nb">
+    <img src="assets/images/logo.png" alt="Red River One" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="nb-t" style="display:none">Red River <span>One</span></span>
+  </a>
+  <ul class="nl" id="navMenu">
+    <li><a href="#story"><svg class="nl-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg><span>Story</span></a></li>
+    <li><a href="#lifecycle"><svg class="nl-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v4h-4"/></svg><span>Tenant Lifecycle</span></a></li>
+    <li><a href="#measurement"><svg class="nl-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l3.5-4 3 2.5L21 7"/></svg><span>Measurement</span></a></li>
+    <li><a href="#how"><svg class="nl-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg><span>How We Work</span></a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="mailto:contact@redriver.one" class="n-cta">Let's Talk →</a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="navMenu" aria-expanded="false">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+  </div>
+</nav>
+
+
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-t">
+    <span class="mq-i">Find Tenants <span>—</span></span><span class="mq-i">Screen &amp; Qualify <span>—</span></span><span class="mq-i">Lease &amp; Onboard <span>—</span></span><span class="mq-i">Maintain &amp; Repair <span>—</span></span><span class="mq-i">Retain &amp; Renew <span>—</span></span><span class="mq-i">Turn &amp; Re-List <span>—</span></span><span class="mq-i">Measure Everything <span>—</span></span><span class="mq-i">Prevent Problems <span>—</span></span><span class="mq-i">AI-Ready Data <span>—</span></span><span class="mq-i">Digital Twins <span>—</span></span>
+    <span class="mq-i">Find Tenants <span>—</span></span><span class="mq-i">Screen &amp; Qualify <span>—</span></span><span class="mq-i">Lease &amp; Onboard <span>—</span></span><span class="mq-i">Maintain &amp; Repair <span>—</span></span><span class="mq-i">Retain &amp; Renew <span>—</span></span><span class="mq-i">Turn &amp; Re-List <span>—</span></span><span class="mq-i">Measure Everything <span>—</span></span><span class="mq-i">Prevent Problems <span>—</span></span><span class="mq-i">AI-Ready Data <span>—</span></span><span class="mq-i">Digital Twins <span>—</span></span>
+  </div>
+</div>
+
+
+<!-- ═══════════════ STORY (themeable: light / dark) ═══════════════ -->
+<div class="story-zone" id="story-zone" data-theme="light">
+
+<!-- ═══════════════ STORY — HERO ═══════════════ -->
+<section class="sec story-hero" id="story">
+  <div class="si">
+    <div class="story-toggle" role="tablist" aria-label="Story section theme">
+      <span class="story-toggle-lbl">Theme</span>
+      <div class="seg">
+        <span class="seg-thumb" aria-hidden="true"></span>
+        <button type="button" class="seg-btn is-active" data-set-theme="light" role="tab" aria-selected="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          Light
+        </button>
+        <button type="button" class="seg-btn" data-set-theme="dark" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          Dark
+        </button>
+      </div>
+    </div>
+    <div class="sty-hero-g">
+      <div class="sty-hero rv">
+        <div class="eye">The Story</div>
+        <h2 class="sty-hero-h">We're not trying to be everything.<br><em>Just very good at this one thing.</em></h2>
+        <p class="sty-hero-lead">The founding idea behind Red River One was simple: <strong>most real estate problems aren't real estate problems. They're operations problems.</strong> A property underperforms not usually because of location or market — but because nobody standardized the maintenance workflows, nobody tracks vendor performance, and the monthly lender report is a one-page rent roll that hides everything important.</p>
+        <figure class="sty-quote rv rd1">
+          <p><span class="sty-quote-mark">&ldquo;</span>The gap between how good properties <em>are</em> run and how good they <em>could</em> be run is almost always an infrastructure problem — not a talent one.</p>
+          <figcaption class="sty-quote-by">The founding thesis</figcaption>
+        </figure>
+      </div>
+      <div class="sty-hero-media rv rd1">
+        <img src="assets/images/story.png" alt="Red River One — the story" class="lb-img" data-lb-title="The Story" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ STORY — APPROACH ═══════════════ -->
+<section class="sec story-sec" id="story-approach">
+  <div class="si">
+    <div class="story-g">
+      <div class="st rv">
+        <div class="eye" style="justify-content:center;">The Conviction</div>
+        <h3 class="st-h" style="text-align:center;">Real estate is <em>the next domain.</em></h3>
+        <div class="st-cols">
+          <p>Anand built workforce development platforms in Texas. The conviction carried into Red River One is that <strong>complex, high-stakes operations can be standardized without losing humanity.</strong></p>
+          <p>A massive asset class, largely managed informally — and a growing appetite from capital for properties that <strong>demonstrate operational discipline.</strong> That's the gap we're built to close.</p>
+        </div>
+        <div class="st-pill">
+          <span class="st-pill-live">Live now</span>
+          <span class="st-pill-tx"><strong>Two buildings in Austin, Texas.</strong> We're getting it right here before going anywhere else.</span>
+        </div>
+      </div>
+      <div class="rv rd2" style="padding-top:6px;">
+        <div class="wwd">
+          <div class="wwd-lbl">What that looks like in practice</div>
+          <div class="wwd-split">
+          <div class="wwd-cards">
+          <div class="wc">
+            <span class="wc-ghost">01</span>
+            <div class="wc-n">01 — Operations</div>
+            <div class="wc-t">We rebuild how your property runs — end to end</div>
+            <div class="wc-b">From the moment a prospective tenant sees your listing to the day they move out, every touchpoint has a defined process, a clear owner, and a way to measure whether it worked.</div>
+          </div>
+          <div class="wc">
+            <span class="wc-ghost">02</span>
+            <div class="wc-n">02 — Reporting</div>
+            <div class="wc-t">Numbers your capital partners will actually trust</div>
+            <div class="wc-b">Accurate reports — with variance narratives, honest KPIs, and the kind of transparency that turns a lender meeting into a conversation, not a defense.</div>
+          </div>
+          <div class="wc">
+            <span class="wc-ghost">03</span>
+            <div class="wc-n">03 — Intelligence</div>
+            <div class="wc-t">Clean data today. AI capability tomorrow.</div>
+            <div class="wc-b">Automation, anomaly detection, digital twins. This layer only works when the foundation is clean. We build toward it deliberately — so when it runs, it runs on real data, not noise.</div>
+          </div>
+          </div>
+          <div class="wwd-media">
+            <img src="assets/images/The Conviction.png" alt="The Conviction" class="wwd-img lb-img" data-lb-title="The Conviction">
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.story-zone -->
+
+
+<!-- ═══════════════ TENANT LIFECYCLE ═══════════════ -->
+<section class="sec lc-sec" id="lifecycle">
+  <div class="si">
+    <div class="lc-intro">
+      <div class="lc-intro-left">
+        <div class="rv">
+          <div class="eye">The Full Picture</div>
+          <h2 class="sh">Every stage of a tenant's life<br><em>with your property, managed properly.</em></h2>
+          <p>A tenant isn't a unit on a spreadsheet. They're a person who chose your property, pays you every month, and whose experience determines whether they stay, refer a friend, or quietly leave at renewal. <strong>Every stage of that relationship is an opportunity to build goodwill — or erode it.</strong></p>
+          <p>Most property managers focus on occupancy. We focus on the full arc — from the first listing impression to the day the unit is turned and ready for the next resident. We've mapped every stage, defined what good looks like, and built the workflows to get there consistently.</p>
+          <p><em>This isn't a brochure</em> — it's the actual process we run at our Austin properties, with the specific metrics we track at each stage. If you want to see the raw data, email us.</p>
+        </div>
+      </div>
+      <div class="lc-intro-right">
+        <img src="assets/images/The Full Picture.png" alt="The Full Picture" class="lc-tl-img lb-img" data-lb-title="The Full Picture" loading="lazy">
+      </div>
+    </div>
+
+    <div class="lc-stick">
+    <div class="lc-tl rv">
+      <div class="lc-tl-head">
+        <div class="lc-tl-t">Tenant Lifecycle — 8 Stages</div>
+        <div class="lc-tl-h">Tap a stage to jump to it ↓</div>
+      </div>
+      <div class="lc-phases">
+        <div class="lc-phase p1">Pre-Lease</div>
+        <div class="lc-phase p2">Active Tenancy</div>
+        <div class="lc-phase p3">Transition</div>
+      </div>
+      <div class="lc-track">
+        <button type="button" class="lc-node s-e" data-stage="1"><span class="lc-node-dot">01</span><span class="lc-node-l">Marketing &amp; Lead Gen</span></button>
+        <button type="button" class="lc-node s-e" data-stage="2"><span class="lc-node-dot">02</span><span class="lc-node-l">Showings &amp; Applications</span></button>
+        <button type="button" class="lc-node s-e" data-stage="3"><span class="lc-node-dot">03</span><span class="lc-node-l">Screening &amp; Approval</span></button>
+        <button type="button" class="lc-node s-s" data-stage="4"><span class="lc-node-dot">04</span><span class="lc-node-l">Move-In &amp; Onboarding</span></button>
+        <button type="button" class="lc-node s-s" data-stage="5"><span class="lc-node-dot">05</span><span class="lc-node-l">Maintenance &amp; Vendors</span></button>
+        <button type="button" class="lc-node s-s" data-stage="6"><span class="lc-node-dot">06</span><span class="lc-node-l">Retention &amp; Renewal</span></button>
+        <button type="button" class="lc-node s-p" data-stage="7"><span class="lc-node-dot">07</span><span class="lc-node-l">Move-Out &amp; Deposit</span></button>
+        <button type="button" class="lc-node s-p" data-stage="8"><span class="lc-node-dot">08</span><span class="lc-node-l">Unit Turn &amp; Make-Ready</span></button>
+      </div>
+    </div>
+
+    <div class="lcs">
+      <!-- STEP 01 -->
+      <div class="ls" data-stage="1">
+        <div class="ls-idx"><div class="ls-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div><div class="ls-n">01</div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Pre-Lease · Finding Tenants</div>
+          <div class="ls-t">Marketing &amp; Lead Generation</div>
+          <div class="ls-b">Before a single application arrives, we want to know exactly where leads come from — and which sources are worth paying for. Listing quality, photo standards, and response time all affect conversion in ways that only show up when you're actually measuring them.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Consistent listings across all platforms with standardized photography and copy</div>
+            <div class="ls-task">Every inquiry acknowledged within 2 hours — tracked, not assumed</div>
+            <div class="ls-task">Source tagging at entry: every lead marked so we know what's working</div>
+            <div class="ls-task">Waitlist management for high-demand units — no vacancy sits unmanaged</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Lead-to-Tour Rate</div><div class="km-d">% of inquiries that become showings — signals listing quality and response speed</div></div>
+          <div class="km"><div class="km-n">Days on Market</div><div class="km-d">Listing-live to signed application, per unit, benchmarked to local market</div></div>
+          <div class="km"><div class="km-n">Lead Source Quality Score</div><div class="km-d">Which channel produces the best tenants at the lowest cost-to-lease</div></div>
+        </div>
+      </div>
+      <!-- STEP 02 -->
+      <div class="ls" data-stage="2">
+        <div class="ls-idx"><div class="ls-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg></div><div class="ls-n">02</div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Pre-Lease · Conversion</div>
+          <div class="ls-t">Showings &amp; Applications</div>
+          <div class="ls-b">A showing is the first real impression. The unit should be clean, the agent prepared, and the follow-up same-day — not when someone remembers. Tour-to-application conversion is one of the most controllable numbers in property management, and one of the most neglected.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Unit showing checklist completed before every tour — lights, HVAC, cleanliness, all fixtures working</div>
+            <div class="ls-task">Same-day follow-up to every prospective tenant who toured, regardless of outcome</div>
+            <div class="ls-task">Application process simplified — every unnecessary step costs a conversion</div>
+            <div class="ls-task">Cancelled showings tracked and root-caused: time of day, listing quality, or price?</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Tour-to-Application Rate</div><div class="km-d">Clearest signal of leasing effectiveness — if low, it's the unit, price, or experience</div></div>
+          <div class="km"><div class="km-n">Application-to-Approval Rate</div><div class="km-d">Tracks criteria alignment; too high or too low both signal something to fix</div></div>
+          <div class="km"><div class="km-n">Follow-Up Compliance %</div><div class="km-d">% of tours with same-day follow-up — a discipline metric, not a result one</div></div>
+        </div>
+      </div>
+      <!-- STEP 03 -->
+      <div class="ls" data-stage="3">
+        <div class="ls-idx"><div class="ls-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div><div class="ls-n">03</div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Pre-Lease · Risk &amp; Compliance</div>
+          <div class="ls-t">Screening &amp; Approval</div>
+          <div class="ls-b">Screening isn't just risk management — it's the beginning of the tenant relationship. Written, consistently applied criteria mean every decision is defensible, every applicant treated fairly, and no one is exposed to fair housing liability from ad-hoc judgment calls.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Written criteria applied uniformly: income ratio, credit thresholds, rental history, background — defined in advance</div>
+            <div class="ls-task">Decision timeline published; no application unanswered beyond 48 hours</div>
+            <div class="ls-task">Adverse action notices handled correctly and on time — legal requirement, tracked to the day</div>
+            <div class="ls-task">All approvals and denials documented with reason codes for the audit trail</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Approval Consistency Score</div><div class="km-d">Are decisions tracking against stated criteria, or drifting? Drift creates legal exposure.</div></div>
+          <div class="km"><div class="km-n">Decision Turnaround Time</div><div class="km-d">Hours from complete application to decision — delays lose qualified applicants</div></div>
+          <div class="km"><div class="km-n">Adverse Action Compliance</div><div class="km-d">100% is the only acceptable number. We track it as such.</div></div>
+        </div>
+      </div>
+      <!-- STEP 04 dark -->
+      <div class="ls ls-dk" data-stage="4">
+        <div class="ls-idx"><div class="ls-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div><div class="ls-n">04</div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Active Tenancy · Day One</div>
+          <div class="ls-t">Move-In &amp; Onboarding</div>
+          <div class="ls-b">Move-in day is the moment a tenant decides whether they made the right choice. A smooth, organized, welcoming onboarding builds goodwill that carries through the entire tenancy. A disorganized one starts a relationship with a deficit — and tenants remember it at renewal time.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Unit inspection completed and documented with photos before keys are handed over</div>
+            <div class="ls-task">Move-in condition report signed by both parties — the baseline that protects everyone at move-out</div>
+            <div class="ls-task">Welcome packet with emergency contacts, maintenance process, community rules — in writing, not verbally</div>
+            <div class="ls-task">30-day check-in call scheduled at move-in day. Proactive. The cheapest retention investment we make.</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Move-In Readiness Score</div><div class="km-d">Was the unit 100% ready on day one? Checked against a defined checklist, not a feeling.</div></div>
+          <div class="km"><div class="km-n">Documentation Completeness</div><div class="km-d">Signed move-in report, executed lease, utility transfer — all on file before keys go out</div></div>
+          <div class="km"><div class="km-n">30-Day Check-In Rate</div><div class="km-d">% of new tenants who got their first proactive check-in. Tracked weekly.</div></div>
+        </div>
+      </div>
+      <!-- STEP 05 dark -->
+      <div class="ls ls-dk" data-stage="5">
+        <div class="ls-idx"><div class="ls-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="ls-n">05</div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Active Tenancy · Day-to-Day</div>
+          <div class="ls-t">Maintenance &amp; Vendor Management</div>
+          <div class="ls-b">Maintenance is where most property management falls apart — and where tenants form their lasting opinion. It's not just about fixing things. It's about communicating clearly, following up, and making people feel heard. We treat every work order as a relationship touchpoint, not just a task in a queue.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Every request logged on receipt — no verbal approvals, no informal group-chat fixes, no exceptions</div>
+            <div class="ls-task">Tenant notified at each stage: received → assigned → scheduled → completed</div>
+            <div class="ls-task">Vendor dispatch tied to qualification criteria — not just whoever picks up the phone</div>
+            <div class="ls-task">Photo verification required before any work order is closed — proof of completion, not trust</div>
+            <div class="ls-task">Preventive maintenance calendar: HVAC filters, gutters, pest control — scheduled ahead of failure</div>
+            <div class="ls-task">Vendor scorecards updated monthly: response time, callback rate, cost vs. estimate, tenant feedback</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Work Order SLA Compliance</div><div class="km-d">Emergency: 4hr. Urgent: 24hr. Routine: 5 days. Every ticket rated against these benchmarks.</div></div>
+          <div class="km"><div class="km-n">Vendor Callback Rate</div><div class="km-d">How often does a "completed" job return? High rate = wrong vendor or wrong scope. Both fixable.</div></div>
+          <div class="km"><div class="km-n">Preventive vs. Reactive Ratio</div><div class="km-d">Are we fixing things before they break, or after? The ratio shows how far ahead we're operating.</div></div>
+        </div>
+      </div>
+      <!-- STEP 06 dark -->
+      <div class="ls ls-dk" data-stage="6">
+        <div class="ls-idx"><div class="ls-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div><div class="ls-n">06</div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Active Tenancy · Relationship</div>
+          <div class="ls-t">Retention &amp; Renewal</div>
+          <div class="ls-b">Keeping a good tenant is almost always cheaper than finding a new one. The cost of a vacancy — lost rent, turn costs, leasing time — can run $2,000–$5,000 per unit. Most properties wait until 60 days before lease end to have the renewal conversation. By then, the tenant has already decided. We start 120 days out — and we watch for the signals that predict a non-renewal before the tenant says a word.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Renewal outreach starts 120 days before expiry — not 60. Earlier contact produces higher renewal rates.</div>
+            <div class="ls-task">Satisfaction check-in at 90 days: open issues resolved before the renewal offer goes out</div>
+            <div class="ls-task">Renewal offers personalised — not a generic form letter with a rent increase attached</div>
+            <div class="ls-task">Non-renewal reasons categorised: price, condition, service, or life change. Each needs a different response.</div>
+            <div class="ls-task">Early warning signals tracked: late payments, maintenance complaint frequency, reduced portal activity</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Renewal Rate</div><div class="km-d">% of eligible tenants who renew. Goal: understand every non-renewal, not just count them.</div></div>
+          <div class="km"><div class="km-n">First Contact Lead Time</div><div class="km-d">Days before expiry of first renewal touchpoint. Earlier is consistently better.</div></div>
+          <div class="km"><div class="km-n">Non-Renewal Root Cause Mix</div><div class="km-d">Categorised so we act on what's within our control — not just accept the loss.</div></div>
+        </div>
+      </div>
+      <!-- STEP 07 -->
+      <div class="ls" data-stage="7">
+        <div class="ls-idx"><div class="ls-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></div><div class="ls-n">07</div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Transition · Departure</div>
+          <div class="ls-t">Move-Out &amp; Security Deposit</div>
+          <div class="ls-b">Move-out is where legal exposure is highest and relationships most fragile. It's also where sloppy record-keeping from move-in comes back to haunt you. We run a tight, documented process — because it's right, and because the alternative is disputes, bad reviews, and sometimes litigation.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Move-out instructions sent 60 days before departure — no surprises about expectations or cleaning standards</div>
+            <div class="ls-task">Move-out inspection within 24 hours of key return, with full photo documentation of every room</div>
+            <div class="ls-task">Move-in condition report used as baseline — every charge reconciled against documented pre-existing condition</div>
+            <div class="ls-task">Deposit itemised and returned within statutory deadline — tracked to the day, no exceptions</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Deposit Return Compliance</div><div class="km-d">% returned within statutory deadline. Legal requirement — we treat it as a discipline metric.</div></div>
+          <div class="km"><div class="km-n">Deposit Dispute Rate</div><div class="km-d">Disputes signal poor move-in documentation or unjustified charges. Both preventable.</div></div>
+          <div class="km"><div class="km-n">Charge Substantiation Rate</div><div class="km-d">% of deductions backed by evidence from both inspections. 100% is the target.</div></div>
+        </div>
+      </div>
+      <!-- STEP 08 -->
+      <div class="ls" data-stage="8">
+        <div class="ls-idx"><div class="ls-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 14.34A2 2 0 0 0 8.66 13.06L3.6 11.4a.4.4 0 0 1 0-.76l5.06-1.66a2 2 0 0 0 1.28-1.28L11.6 2.64a.4.4 0 0 1 .76 0l1.66 5.06a2 2 0 0 0 1.28 1.28l5.06 1.66a.4.4 0 0 1 0 .76l-5.06 1.66a2 2 0 0 0-1.28 1.28L12.36 19.4a.4.4 0 0 1-.76 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></div><div class="ls-n">08</div></div>
+        <div class="ls-m">
+          <div class="ls-ph">Transition · Reset</div>
+          <div class="ls-t">Unit Turn &amp; Make-Ready</div>
+          <div class="ls-b">Every day a unit sits vacant after move-out is money out of the owner's pocket. Turn time is one of the highest-ROI levers in multifamily — and one of the most ignored. We treat each turn like a small construction project: scoped in advance, scheduled tightly, tracked against a hard completion date.</div>
+          <div class="ls-tasks">
+            <div class="ls-task">Turn scope finalised within 48 hours of move-out inspection — no waiting to "walk it again"</div>
+            <div class="ls-task">Make-ready checklist covers every system: HVAC, plumbing, appliances, paint, flooring, fixtures, deep clean</div>
+            <div class="ls-task">Vendor scheduling coordinated in sequence — no trades sitting idle waiting on each other</div>
+            <div class="ls-task">Target move-in date set at turn start; every day of overrun tracked and root-caused, not accepted</div>
+            <div class="ls-task">Re-inspection before keys go out — the next tenant's move-in report is the final quality check on the turn</div>
+          </div>
+        </div>
+        <div class="ls-kpi">
+          <div class="ls-kpi-t">What We Measure</div>
+          <div class="km"><div class="km-n">Turn Time (Days)</div><div class="km-d">Move-out to move-in-ready. Every day counts. Tracked per unit, trended over time.</div></div>
+          <div class="km"><div class="km-n">Turn Cost vs. Budget</div><div class="km-d">Scope defined upfront, actuals compared at close. Variance investigated, not silently accepted.</div></div>
+          <div class="km"><div class="km-n">Make-Ready Pass Rate</div><div class="km-d">% of units that pass re-inspection on first attempt — quality indicator for the turn process itself.</div></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="callout rv">
+      <p><strong>These eight stages are a loop, not a line.</strong> The quality of each turn shapes the next move-in experience. That experience shapes whether the tenant maintains well, renews, and refers. Good operations compound — but only if every stage is actually managed and measured. Miss one consistently, and the rest quietly degrades.</p>
+    </div>
+
+    <aside class="lc-snap lc-snap-row rv rd2">
+      <div class="lc-snap-head">
+        <div class="lc-snap-lbl">What Stays Constant</div>
+        <div class="lc-snap-h">Different stages.<br><em>One standard.</em></div>
+      </div>
+      <ul class="lc-snap-list">
+        <li>A single accountable owner</li>
+        <li>A written checklist, not memory</li>
+        <li>A metric reported every month</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+
+<!-- ═══════════════ MEASUREMENT / GIGO ═══════════════ -->
+<section class="sec msr-sec" id="measurement">
+  <div class="si">
+    <div class="eye rv">How We Measure</div>
+
+    <div class="msr-g">
+      <div class="msr-t rv">
+        <h2 class="sh">Garbage In, Garbage Out.<br><em>So we're obsessive about the inputs.</em></h2>
+        <p>We've seen a lot of property dashboards. They look impressive — charts, trend lines, occupancy percentages. And then you ask: <strong>where does that number actually come from?</strong> The honest answer is usually "it's what the property manager entered into the system."</p>
+        <div class="mpull">A KPI built on unmeasured activity isn't a metric. It's a guess in a spreadsheet wearing a suit.</div>
+        <p>We built our measurement approach around one principle: <em>we only report what we can directly trace to a logged event.</em> A work order is closed when a photo is uploaded and reviewed — not when someone marks it done. A unit is vacant when it's recorded with a date stamp — not when someone updates the whiteboard. A vendor is paid when the invoice matches the approved scope and the work is verified — not when someone says it looks fine.</p>
+        <p><strong>This sounds obvious. Almost nobody does it.</strong> The reason most property KPIs are unreliable is that underlying data is entered manually, inconsistently, and often after the fact. Our job is to build systems where data captures itself — so by the time a metric appears in a report, it reflects something that actually happened.</p>
+        <p>We're honest about where we stand. We're 12 months in. Our metrics are improving, not perfect. But we can show you exactly how each one is calculated, what its data source is, and what confidence level we'd put on it. <em>That's a higher bar than most operators hold themselves to — and it's the only foundation that makes AI and digital twins actually useful.</em></p>
+        <div class="callout" style="margin-bottom:0">
+          <p><strong>Our KPI policy:</strong> We don't include a metric in any report unless we can trace it to a primary source event. We don't round numbers to look better. We don't average over a period to hide a bad month. And when a metric is in progress — like our unit turn time data — we say so clearly.</p>
+        </div>
+      </div>
+      <div class="rv rd2">
+        <h3 style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:10px;letter-spacing:-.01em;">From Measurement to Prevention</h3>
+        <div class="loop-card" style="margin-bottom:32px">
+          <div class="loop-t">The Measurement Loop</div>
+          <div class="loop-s">Every metric feeds a decision. Every decision changes an action. Every action produces new data. This is how you prevent problems instead of react to them.</div>
+          <div class="loop-steps">
+            <div class="lstep"><div class="ld">M</div><div class="ln">Measure</div><div class="ld-d">Log at source</div></div>
+            <div class="lstep"><div class="ld">A</div><div class="ln">Analyse</div><div class="ld-d">Find patterns</div></div>
+            <div class="lstep"><div class="ld">F</div><div class="ln">Flag</div><div class="ld-d">Surface anomalies</div></div>
+            <div class="lstep"><div class="ld">A</div><div class="ln">Act</div><div class="ld-d">Named owner, specific action</div></div>
+            <div class="lstep"><div class="ld">P</div><div class="ln">Prevent</div><div class="ld-d">Problem doesn't recur</div></div>
+          </div>
+        </div>
+        <p style="font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:22px;">The whole point of measuring is to stop reacting and start anticipating. Here's how specific KPIs translate into specific preventive actions — in the protocols we run at our Austin properties right now.</p>
+        <div class="prev-g">
+          <div class="pc"><div class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg></div><div class="pc-tx"><div class="pc-t">Maintenance Spike Detection</div><div class="pc-b">When work orders for a system run 20%+ above the 90-day average, we schedule an inspection — catching the failing compressor before it dies in August.</div></div></div>
+          <div class="pc"><div class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg></div><div class="pc-tx"><div class="pc-t">Early Renewal Warning</div><div class="pc-b">Tenants with 2+ complaints a quarter, or dropping portal activity, get a proactive check-in 90 days out — so the renewal talk starts before the decision is made.</div></div></div>
+          <div class="pc"><div class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></div><div class="pc-tx"><div class="pc-t">Vendor Performance Gates</div><div class="pc-b">Any vendor above a 15% callback rate in 30 days goes on review. Two bad months and they're replaced — on record, not instinct.</div></div></div>
+          <div class="pc"><div class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="pc-tx"><div class="pc-t">Rent Leakage Audit</div><div class="pc-b">Monthly reconciliation of what should have been billed versus what was. Leakage is usually accidental — a waived fee, a missed charge. We catch it every month.</div></div></div>
+          <div class="pc"><div class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="pc-tx"><div class="pc-t">Turn Time Overrun Response</div><div class="pc-b">A unit 3+ days over turn target triggers daily checks, each overrun root-caused — scope creep, vendor delay, or scheduling. That reshapes the next turn.</div></div></div>
+          <div class="pc"><div class="pc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="pc-tx"><div class="pc-t">Leasing Source Re-Allocation</div><div class="pc-b">Each quarter we review cost per qualified applicant and lease quality by channel, shifting spend toward what produces good tenants — not just volume.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-block rv">
+    <h3 class="rv" style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em;text-align:center;">Three KPI Tiers. Each with a Specific Job.</h3>
+    <p class="rv" style="font-size:14px;color:var(--ink-soft);line-height:1.8;max-width:680px;margin:0 auto 24px;text-align:center;">Not all metrics need the same cadence. Some tell you whether today is going well. Others tell you whether next quarter will.</p>
+    <div class="kpi-tiers rv">
+      <div class="kt">
+        <span class="kt-num">01</span>
+        <div class="kt-l"><div class="kt-h"><div class="kt-e">Tier 1 · Foundation</div><div class="kt-n">Operational Health</div></div><div class="kt-s">Daily / Weekly</div></div>
+        <div class="kt-b">
+          <p>Discipline metrics — are basic processes being followed? Not exciting. Essential. If these aren't green, nothing above them means anything.</p>
+          <div class="ki-wrap">
+            <span class="ki ki-e">Work Order SLA Compliance %</span><span class="ki ki-e">Open Work Orders by Age</span><span class="ki ki-e">Inquiry Response Time</span><span class="ki ki-e">Rent Collection Rate</span><span class="ki ki-e">Late Payment Count</span><span class="ki ki-e">Vendor Response Time</span><span class="ki ki-e">Make-Ready Status by Unit</span>
+          </div>
+        </div>
+      </div>
+      <div class="kt">
+        <span class="kt-num">02</span>
+        <div class="kt-l"><div class="kt-h"><div class="kt-e">Tier 2 · Performance</div><div class="kt-n">Financial Performance</div></div><div class="kt-s">Monthly</div></div>
+        <div class="kt-b">
+          <p>These go into the lender package and investor update. They need to be accurate before being shared — not estimated, not rounded. These numbers build or destroy credibility with capital.</p>
+          <div class="ki-wrap">
+            <span class="ki ki-s">NOI vs. Budget Variance</span><span class="ki ki-s">Gross Revenue vs. Pro Forma</span><span class="ki ki-s">Operating Expense Ratio</span><span class="ki ki-s">Economic Occupancy</span><span class="ki ki-s">Capex vs. Plan</span><span class="ki ki-s">Rent Leakage</span><span class="ki ki-s">Vendor Cost Variance</span>
+          </div>
+        </div>
+      </div>
+      <div class="kt">
+        <span class="kt-num">03</span>
+        <div class="kt-l"><div class="kt-h"><div class="kt-e">Tier 3 · Foresight</div><div class="kt-n">Trend &amp; Prevention</div></div><div class="kt-s">Quarterly</div></div>
+        <div class="kt-b">
+          <p>Where patterns become strategy — looking for things about to become problems, not things already broken. These feed the prevention playbook for next quarter.</p>
+          <div class="ki-wrap">
+            <span class="ki">Renewal Rate Trend</span><span class="ki">Non-Renewal Root Cause Mix</span><span class="ki">Vendor Callback Rate (90d)</span><span class="ki">Lead Source Quality Score</span><span class="ki">Preventive vs. Reactive Ratio</span><span class="ki">Complaints per Unit</span><span class="ki">Turn Time Portfolio Trend</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ HOW WE WORK ═══════════════ -->
+<section class="sec how-sec" id="how">
+  <div class="si">
+    <div class="eye rv">How We Work</div>
+    <h2 class="sh rv">We show up, learn the property,<br><em>and fix it in the right order.</em></h2>
+    <p class="sl rv">Good operations come from doing the basics really well, in the right sequence, before adding any complexity.</p>
+    <div class="hw-grid rv">
+    <div class="hw-col-img">
+      <img src="assets/images/How We Work.png" alt="The path to intelligent property operations — diagnostic and mapping, establishing core operations, then layering in advanced intelligence" class="lc-tl-img lb-img" data-lb-title="The Path to Intelligent Property Operations" loading="lazy">
+    </div>
+    <div class="hw-col-flow">
+    <ol class="hw-flow">
+      <li class="hw-step">
+        <div class="hw-rail"><span class="hw-node">01</span></div>
+        <div class="hw-body">
+          <div class="hw-meta"><span class="hw-phase">Weeks 1–4</span><span class="hw-tag">Diagnostic</span></div>
+          <h3 class="hw-t">Map what exists</h3>
+          <p class="hw-d">We spend the first 2–4 weeks walking every process: how does a maintenance request actually get handled? Who approves vendor payments? How is the leasing team tracking leads? No judgment — just an honest picture of where things stand, with notes on what's working and what isn't.</p>
+        </div>
+      </li>
+      <li class="hw-step">
+        <div class="hw-rail"><span class="hw-node">02</span></div>
+        <div class="hw-body">
+          <div class="hw-meta"><span class="hw-phase">Months 1–3</span><span class="hw-tag">Operations + Reporting</span></div>
+          <h3 class="hw-t">Rebuild the foundations</h3>
+          <p class="hw-d">Define workflows across all 8 lifecycle stages, assign owners, set SLAs, establish approval thresholds. Stand up the monthly reporting package. Get every event into the system. Unglamorous work — and the only work that makes everything else possible.</p>
+        </div>
+      </li>
+      <li class="hw-step">
+        <div class="hw-rail"><span class="hw-node">03</span></div>
+        <div class="hw-body">
+          <div class="hw-meta"><span class="hw-phase">Month 3+</span><span class="hw-tag">Intelligence &amp; AI Readiness</span></div>
+          <h3 class="hw-t">Layer in intelligence</h3>
+          <p class="hw-d">Once operations are clean and reporting is consistent, the data becomes worth something. Anomaly detection, automation, digital twin layers — built on a foundation that supports them. This layer only tells you the truth if the underlying data does too. We don't rush this step.</p>
+        </div>
+      </li>
+    </ol>
+    <div class="callout" style="margin:24px 0 0">
+      <p><strong>What 90 days looks like:</strong> A complete operational audit. Structured workflows deployed across the full tenant lifecycle. Your first lender-ready monthly report. A clear picture of where money is being lost or left on the table. And the beginnings of an AI-ready data foundation that will compound in value the longer we operate together.</p>
+    </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-sec" id="contact">
+  <div class="cta-in">
+    <div class="cta-eye rv">Work With Us</div>
+    <h2 class="cta-h rv">Have a property that deserves<br><em>to be run better?</em></h2>
+    <p class="cta-p rv">We're selective. We take on properties where we believe we can produce a measurable operational improvement within 90 days — visible change across the full tenant lifecycle, backed by data you can show a lender. If you're a property owner, investor, or operator looking for a genuine systems partner, let's have a real conversation.</p>
+    <div class="cta-btns rv">
+      <a href="mailto:contact@redriver.one" class="cta-bp">Email the Team</a>
+      <a href="#lifecycle" class="bgw">See the Full Lifecycle</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi">
+    <div>
+      <img src="assets/images/logo.png" alt="Red River One" onerror="this.style.display='none'">
+      <p class="fd">We manage properties the way they deserve to be managed — every stage of the tenant lifecycle, every metric tracked, every process owned. Building AI-ready operations, one property at a time.</p>
+      <div class="fl-c">Dallas, TX · Mumbai · Managua</div>
+    </div>
+    <div>
+      <div class="ft">Explore</div>
+      <ul class="fl">
+        <li><a href="#story">Our Story</a></li><li><a href="#lifecycle">Tenant Lifecycle</a></li><li><a href="#measurement">How We Measure</a></li><li><a href="#how">How We Work</a></li><li><a href="#contact">Work With Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft">Ecosystem</div>
+      <ul class="fl">
+        <li><a href="#">IT Vision Academy</a></li><li><a href="#">Jansankalp Foundation</a></li><li><a href="#">Axiphyl</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft">Legal</div>
+      <ul class="fl">
+        <li><a href="#">Disclosures</a></li><li><a href="#">Responsible AI</a></li><li><a href="#">Data Governance</a></li><li><a href="#">Press</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb">
+    <div class="fc">© 2026 Red River One LLC — Dallas, Texas, USA</div>
+    <div class="fdisc">Past performance is not indicative of future results. All forward-looking statements are subject to risk and uncertainty. Real estate investments are illiquid and subject to market conditions. Capital at risk — no guarantee of returns is expressed or implied.</div>
+  </div>
+</footer>
+
+<!-- Image lightbox -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image viewer">
+  <button type="button" class="lb-close" aria-label="Close image viewer">&times;</button>
+  <figure class="lb-figure">
+    <img src="" alt="">
+    <figcaption class="lb-cap"></figcaption>
+  </figure>
+</div>
+
+<script>
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
+}),{threshold:0.05,rootMargin:'0px 0px -18px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+['mp-cards','prev-g','how-g','ppl-g','loc-g','eco-g','sc-g','proof-g','wwd','ai-layers','kpi-tiers'].forEach(c=>{
+  document.querySelectorAll('.'+c).forEach(g=>{
+    Array.from(g.children).forEach((ch,i)=>{ch.style.transitionDelay=(i*52)+'ms';});
+  });
+});
+
+window.addEventListener('scroll',()=>{
+  let cur='';
+  document.querySelectorAll('section[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-90)cur=s.id;});
+  document.querySelectorAll('.nl a').forEach(a=>{ a.classList.toggle('active',a.getAttribute('href')==='#'+cur); });
+});
+
+// Story section — light / dark theme toggle (remembers choice)
+(()=>{
+  const zone=document.getElementById('story-zone');
+  if(!zone)return;
+  const btns=[...zone.querySelectorAll('.seg-btn')];
+  function apply(theme){
+    zone.dataset.theme=theme;
+    btns.forEach(b=>{
+      const on=b.dataset.setTheme===theme;
+      b.classList.toggle('is-active',on);
+      b.setAttribute('aria-selected',on?'true':'false');
+    });
+    try{localStorage.setItem('rr-story-theme',theme);}catch(e){}
+  }
+  let saved;try{saved=localStorage.getItem('rr-story-theme');}catch(e){}
+  apply(saved==='light'||saved==='dark'?saved:zone.dataset.theme||'dark');
+  btns.forEach(b=>b.addEventListener('click',()=>apply(b.dataset.setTheme)));
+})();
+
+// Tenant lifecycle — sticky parallax: each stage pins, its inner layers drift while held
+(()=>{
+  const cards=[...document.querySelectorAll('.lcs .ls')];
+  if(!cards.length)return;
+  const TOP=84;                                               // single sticky position for all 8 stages
+  cards.forEach(c=>c.style.setProperty('--lc-top',TOP+'px'));
+  const NUM=0, KPI=0;                                         // cards now flow normally with gaps — pin-drift disabled
+
+  // per-card layer handles + flow geometry (recomputed on resize/load)
+  function absTop(el){let y=0;while(el){y+=el.offsetTop;el=el.offsetParent;}return y;}
+  const L=cards.map(c=>({n:c.querySelector('.ls-n'),kpi:[...c.querySelectorAll('.ls-kpi > *')]}));
+  let tops=[], ranges=[];
+  function measure(){
+    const vh=window.innerHeight;
+    tops=cards.map(absTop);
+    ranges=cards.map((c,i)=>cards[i+1] ? tops[i+1]-tops[i] : c.offsetHeight+vh*0.40);
+  }
+
+  let ticking=false;
+  function update(){
+    ticking=false;
+    for(let i=0;i<cards.length;i++){
+      const range=ranges[i]||1;
+      let p;                                                  // 0 when the stage first pins → 1 as it's handed off
+      if(cards[i+1]) p=1-Math.min(Math.max((cards[i+1].getBoundingClientRect().top-TOP)/range,0),1);
+      else           p=Math.min(Math.max((window.scrollY-(tops[i]-TOP))/range,0),1);
+      const d=p-0.5;                                          // centre the drift around the stage's resting state
+      if(L[i].n) L[i].n.style.transform='translate3d(0,'+(d*-NUM).toFixed(1)+'px,0)';   // number drifts slow, upward
+      const ky=(d*KPI).toFixed(1);
+      L[i].kpi.forEach(el=>el.style.transform='translate3d(0,'+ky+'px,0)');             // KPI panel drifts opposite
+    }
+  }
+  function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(update);} }
+
+  const mq=window.matchMedia('(max-width:768px)');
+  function setup(){
+    if(mq.matches){
+      window.removeEventListener('scroll',onScroll);
+      window.removeEventListener('resize',onResize);
+      L.forEach(l=>{ if(l.n)l.n.style.transform=''; l.kpi.forEach(el=>el.style.transform=''); });
+    }else{
+      measure();
+      window.addEventListener('scroll',onScroll,{passive:true});
+      window.addEventListener('resize',onResize);
+      update();
+    }
+  }
+  function onResize(){ measure(); update(); }
+  mq.addEventListener('change',setup);
+  window.addEventListener('load',()=>{ if(!mq.matches){measure();update();} });
+  setup();
+})();
+
+// Tenant lifecycle — clickable stage index (jump to description + scroll-spy)
+(()=>{
+  const rows=[...document.querySelectorAll('.lc-track .lc-node')];
+  const cards=[...document.querySelectorAll('.lcs .ls')];
+  if(!rows.length||!cards.length)return;
+  const tl=document.querySelector('.lc-tl');
+  const STICK=66;                                            // .lc-tl sticky top offset (see CSS)
+  // bottom edge of the sticky timeline when pinned — clears it so the card shows from its top
+  function navBottom(){ return STICK + (tl ? tl.offsetHeight : 0); }
+  const cardFor=n=>cards.find(c=>c.dataset.stage===n);
+  function absTop(el){let y=0;while(el){y+=el.offsetTop;el=el.offsetParent;}return y;}
+  rows.forEach(row=>{
+    row.addEventListener('click',()=>{
+      const n=row.dataset.stage, card=cardFor(n);
+      if(!card)return;
+      const top=absTop(card)-navBottom()-16;                 // land the card fully below the pinned timeline
+      window.scrollTo({top:Math.max(top,0),behavior:'smooth'});
+    });
+  });
+  let ticking=false;
+  function spy(){
+    ticking=false;
+    const line=navBottom()+24;                               // match the active marker to where cards land
+    let active=rows[0].dataset.stage;
+    cards.forEach(c=>{ if(c.getBoundingClientRect().top<=line) active=c.dataset.stage; });
+    rows.forEach(r=>r.classList.toggle('active',r.dataset.stage===active));
+  }
+  window.addEventListener('scroll',()=>{ if(!ticking){ticking=true;requestAnimationFrame(spy);} },{passive:true});
+  spy();
+})();
+
+document.querySelectorAll('.pphoto img').forEach(img=>{
+  function fb(){img.style.display='none';const p=img.nextElementSibling;if(p)p.style.display='flex';}
+  img.addEventListener('error',fb);
+  if(img.complete&&img.naturalWidth===0)fb();
+});
+
+// Mobile nav — hamburger toggle
+(()=>{
+  const nav=document.querySelector('nav');
+  const toggle=document.getElementById('navToggle');
+  const menu=document.getElementById('navMenu');
+  if(!nav||!toggle||!menu)return;
+  function setOpen(open){
+    nav.classList.toggle('nav-open',open);
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+    toggle.setAttribute('aria-label',open?'Close menu':'Open menu');
+  }
+  toggle.addEventListener('click',e=>{e.stopPropagation();setOpen(!nav.classList.contains('nav-open'));});
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setOpen(false)));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')setOpen(false); });
+  document.addEventListener('click',e=>{ if(nav.classList.contains('nav-open')&&!nav.contains(e.target))setOpen(false); });
+  window.matchMedia('(max-width:768px)').addEventListener('change',e=>{ if(!e.matches)setOpen(false); });
+})();
+
+// Image lightbox
+(()=>{
+  const lb=document.getElementById('lightbox');
+  if(!lb)return;
+  const lbImg=lb.querySelector('.lb-figure img');
+  const lbTitle=lb.querySelector('.lb-cap');
+  let lastFocus=null;
+  function open(src,alt,title){
+    lbImg.src=src;lbImg.alt=alt||'';
+    lbTitle.textContent=title||'';
+    lbTitle.style.display=title?'block':'none';
+    lastFocus=document.activeElement;
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    lb.querySelector('.lb-close').focus();
+  }
+  function close(){
+    lb.classList.remove('open');
+    lb.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    if(lastFocus)lastFocus.focus();
+  }
+  document.querySelectorAll('.lb-img').forEach(img=>{
+    img.style.cursor='zoom-in';
+    img.addEventListener('click',()=>open(img.currentSrc||img.src,img.alt,img.dataset.lbTitle));
+  });
+  lb.addEventListener('click',e=>{ if(e.target===lb||e.target.classList.contains('lb-close'))close(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&lb.classList.contains('open'))close(); });
+})();
+</script>
+</body>
+</html>
