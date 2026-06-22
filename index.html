@@ -57,7 +57,10 @@
     .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(242,102,37,0.3); }
     .hamburger { display: none; background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; }
     @media (max-width: 768px) {
-      .nav-links { display: none; }
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.95); backdrop-filter: blur(20px); padding: 20px 24px; gap: 16px; border-bottom: 1px solid var(--glass-border); }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 16px; padding: 8px 0; }
+      .nav-cta { text-align: center; display: block; }
       .hamburger { display: block; }
     }
 
@@ -228,7 +231,7 @@
         <a href="#process">Process</a>
         <a href="#contact" class="nav-cta">Let's Talk →</a>
       </div>
-      <button class="hamburger" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'">☰</button>
+      <button class="hamburger" id="menuBtn">☰</button>
     </div>
   </nav>
 
@@ -320,6 +323,21 @@
       </div>
       <div class="portfolio-grid top">
         <div class="portfolio-card reveal">
+          <img src="assets/images/portfolio/addison-1.jpg" alt="The Addison at Waco" class="portfolio-img" loading="lazy" decoding="async" />
+          <span class="portfolio-badge badge-active">Active</span>
+          <div class="portfolio-info">
+            <div class="portfolio-name">The Addison at Waco</div>
+            <div class="portfolio-loc">Waco, TX</div>
+            <div class="portfolio-type">Student Housing · 2–6 BR Furnished</div>
+            <div class="portfolio-tags">
+              <span class="portfolio-tag">Furnished</span>
+              <span class="portfolio-tag">Gated</span>
+              <span class="portfolio-tag">Study Rooms</span>
+              <span class="portfolio-tag">Near Baylor</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card reveal">
           <img src="assets/images/portfolio/whitestone-1.jpg" alt="Whitestone Crossing" class="portfolio-img" loading="lazy" decoding="async" />
           <span class="portfolio-badge badge-active">Active</span>
           <div class="portfolio-info">
@@ -346,21 +364,6 @@
               <span class="portfolio-tag">Fire Pit</span>
               <span class="portfolio-tag">Bark Park</span>
               <span class="portfolio-tag">2-Car Garage</span>
-            </div>
-          </div>
-        </div>
-        <div class="portfolio-card reveal">
-          <img src="assets/images/portfolio/addison-1.jpg" alt="The Addison at Waco" class="portfolio-img" loading="lazy" decoding="async" />
-          <span class="portfolio-badge badge-active">Active</span>
-          <div class="portfolio-info">
-            <div class="portfolio-name">The Addison at Waco</div>
-            <div class="portfolio-loc">Waco, TX</div>
-            <div class="portfolio-type">Student Housing · 2–6 BR Furnished</div>
-            <div class="portfolio-tags">
-              <span class="portfolio-tag">Furnished</span>
-              <span class="portfolio-tag">Gated</span>
-              <span class="portfolio-tag">Study Rooms</span>
-              <span class="portfolio-tag">Near Baylor</span>
             </div>
           </div>
         </div>
@@ -491,6 +494,20 @@
     // Scroll nav
     window.addEventListener('scroll', () => {
       document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60)
+    })
+
+    // Hamburger menu
+    const menuBtn = document.getElementById('menuBtn')
+    const navLinks = document.querySelector('.nav-links')
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open')
+      menuBtn.textContent = isOpen ? '✕' : '☰'
+    })
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open')
+        menuBtn.textContent = '☰'
+      })
     })
 
     // Reveal on scroll
