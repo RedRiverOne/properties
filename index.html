@@ -167,8 +167,104 @@
     .footer-copy { font-size: 12px; color: var(--text-dim); }
 
     /* ═══ ANIMATIONS ═══ */
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* Reveal variants */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-scale { opacity: 0; transform: scale(0.92); transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    /* Stagger children */
+    .stagger > *:nth-child(1) { transition-delay: 0ms; }
+    .stagger > *:nth-child(2) { transition-delay: 100ms; }
+    .stagger > *:nth-child(3) { transition-delay: 200ms; }
+    .stagger > *:nth-child(4) { transition-delay: 300ms; }
+    .stagger > *:nth-child(5) { transition-delay: 400ms; }
+    .stagger > *:nth-child(6) { transition-delay: 500ms; }
+
+    /* Hero entrance */
+    .hero-eyebrow { animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both; }
+    .hero h1 { animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both; }
+    .hero-sub { animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both; }
+    .hero-actions { animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both; }
+    .hero-stats { animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s both; }
+    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Stat counter animation */
+    .hero-stat-value { animation: countPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both; }
+    @keyframes countPop { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+
+    /* Card hover lift */
+    .service-card, .portfolio-card, .metric-card, .process-step {
+      transition: border-color 0.3s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+    }
+    .service-card:hover, .portfolio-card:hover, .metric-card:hover, .process-step:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    /* Image zoom on hover */
+    .portfolio-img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .portfolio-card:hover .portfolio-img { transform: scale(1.05); }
+
+    /* Badge shimmer */
+    .hero-eyebrow { position: relative; overflow: hidden; }
+    .hero-eyebrow::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    @keyframes shimmer { 0%, 100% { left: -100%; } 50% { left: 100%; } }
+
+    /* Brand accent glow pulse on CTA */
+    .btn-primary { position: relative; overflow: hidden; }
+    .btn-primary::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 70%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .btn-primary:hover::after { opacity: 1; }
+
+    /* Floating dots background for metrics section */
+    .section-dark { position: relative; }
+    .section-dark::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(242,102,37,0.06) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Smooth scroll indicator */
+    .nav { transition: background 0.4s, backdrop-filter 0.4s, padding 0.3s; }
+    .nav.scrolled { padding: 12px 0; }
+
+    /* Text gradient on metric values */
+    .metric-value {
+      background: linear-gradient(135deg, var(--brand) 0%, #ff9a5c 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Service number parallax float */
+    .service-no { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .service-card:hover .service-no { transform: translateY(-4px); }
+
+    /* Tag hover */
+    .service-tag { transition: background 0.2s, border-color 0.2s; }
+    .service-tag:hover { background: rgba(242,102,37,0.12); border-color: rgba(242,102,37,0.25); }
+    .portfolio-tag { transition: background 0.2s; }
+    .portfolio-tag:hover { background: rgba(255,255,255,0.1); }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
 
     /* ═══ MOBILE RESPONSIVE ═══ */
     @media (max-width: 768px) {
@@ -278,7 +374,7 @@
         <h2 class="section-title">Multi-family. Single-family.<br/><em>One standard.</em></h2>
         <p class="section-body">Every property we manage gets the same institutional-grade operations — structured workflows, transparent reporting, and AI-ready data from day one.</p>
       </div>
-      <div class="services-grid">
+      <div class="services-grid stagger">
         <div class="service-card reveal">
           <div class="service-no">01</div>
           <h3>Operations</h3>
@@ -321,8 +417,8 @@
         <h2 class="section-title">Properties we <em>operate.</em></h2>
         <p class="section-body">From student housing to luxury apartments to single-family homes — every property gets the same institutional standard.</p>
       </div>
-      <div class="portfolio-grid top">
-        <div class="portfolio-card reveal">
+      <div class="portfolio-grid top stagger">
+        <div class="portfolio-card reveal-scale">
           <img src="assets/images/portfolio/addison-1.jpg" alt="The Addison at Waco" class="portfolio-img" loading="lazy" decoding="async" />
           <span class="portfolio-badge badge-active">Active</span>
           <div class="portfolio-info">
@@ -337,7 +433,7 @@
             </div>
           </div>
         </div>
-        <div class="portfolio-card reveal">
+        <div class="portfolio-card reveal-scale">
           <img src="assets/images/portfolio/whitestone-1.jpg" alt="Whitestone Crossing" class="portfolio-img" loading="lazy" decoding="async" />
           <span class="portfolio-badge badge-active">Active</span>
           <div class="portfolio-info">
@@ -352,7 +448,7 @@
             </div>
           </div>
         </div>
-        <div class="portfolio-card reveal">
+        <div class="portfolio-card reveal-scale">
           <img src="assets/images/portfolio/trailside-2.jpg" alt="Trailside Oaks" class="portfolio-img" loading="lazy" decoding="async" />
           <span class="portfolio-badge badge-active">Active</span>
           <div class="portfolio-info">
@@ -368,8 +464,8 @@
           </div>
         </div>
       </div>
-      <div class="portfolio-grid bottom">
-        <div class="portfolio-card reveal">
+      <div class="portfolio-grid bottom stagger">
+        <div class="portfolio-card reveal-scale">
           <img src="assets/images/portfolio/walnut-square.webp" alt="2148 Walnut Square Dr, Plano" class="portfolio-img" loading="lazy" decoding="async" />
           <span class="portfolio-badge badge-soon">Coming Soon</span>
           <div class="portfolio-info">
@@ -378,7 +474,7 @@
             <div class="portfolio-type">Single Family · Residential</div>
           </div>
         </div>
-        <div class="portfolio-card reveal">
+        <div class="portfolio-card reveal-scale">
           <img src="assets/images/portfolio/3330-Unicorn-Lake.jpg" alt="3330 Unicorn Lake" class="portfolio-img" loading="lazy" decoding="async" />
           <span class="portfolio-badge badge-soon">Coming Soon</span>
           <div class="portfolio-info">
@@ -400,32 +496,32 @@
         <p class="section-body">No vanity metrics. Every KPI traces back to a logged event in our system.</p>
       </div>
       <div class="metrics-grid">
-        <div class="metric-card reveal">
+        <div class="metric-card reveal-scale">
           <div class="metric-value">4hr</div>
           <div class="metric-label">Emergency Response SLA</div>
           <div class="metric-desc">Urgent: 24hr · Routine: 5 days</div>
         </div>
-        <div class="metric-card reveal">
+        <div class="metric-card reveal-scale">
           <div class="metric-value">120d</div>
           <div class="metric-label">Early Renewal Outreach</div>
           <div class="metric-desc">Not 60. Start retention early.</div>
         </div>
-        <div class="metric-card reveal">
+        <div class="metric-card reveal-scale">
           <div class="metric-value">48hr</div>
           <div class="metric-label">Unit Turn Scope</div>
           <div class="metric-desc">Turn scope finalized within 48hrs of move-out</div>
         </div>
-        <div class="metric-card reveal">
+        <div class="metric-card reveal-scale">
           <div class="metric-value">2hr</div>
           <div class="metric-label">Inquiry Response Time</div>
           <div class="metric-desc">Every inquiry acknowledged in under 2 hours</div>
         </div>
-        <div class="metric-card reveal">
+        <div class="metric-card reveal-scale">
           <div class="metric-value">100%</div>
           <div class="metric-label">Photo-Verified Closures</div>
           <div class="metric-desc">Work orders close with evidence, not clicks</div>
         </div>
-        <div class="metric-card reveal">
+        <div class="metric-card reveal-scale">
           <div class="metric-value">Monthly</div>
           <div class="metric-label">Lender-Ready Reports</div>
           <div class="metric-desc">NOI, variance, occupancy — every month</div>
@@ -510,11 +606,24 @@
       })
     })
 
-    // Reveal on scroll
+    // Reveal on scroll (all variants)
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } })
-    }, { threshold: 0.1 })
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' })
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el))
+
+    // Parallax tilt on portfolio cards
+    document.querySelectorAll('.portfolio-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect()
+        const x = (e.clientX - rect.left) / rect.width - 0.5
+        const y = (e.clientY - rect.top) / rect.height - 0.5
+        card.style.transform = `translateY(-6px) perspective(600px) rotateY(${x * 4}deg) rotateX(${-y * 4}deg)`
+      })
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = ''
+      })
+    })
   </script>
 </body>
 </html>
