@@ -60,7 +60,7 @@
       .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: rgba(13,13,13,0.95); backdrop-filter: blur(20px); padding: 20px 24px; gap: 16px; border-bottom: 1px solid var(--glass-border); }
       .nav-links.open { display: flex; }
       .nav-links a { font-size: 16px; padding: 8px 0; }
-      .nav-cta { text-align: center; display: block; padding: 14px 28px; font-size: 15px; margin-top: 4px; }
+      .nav-cta { text-align: center; display: block; padding: 16px 32px; font-size: 17px; margin-top: 8px; width: 100%; box-sizing: border-box; }
       .hamburger { display: block; }
     }
 
@@ -82,11 +82,14 @@
     .btn-ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
 
     /* Hero stats */
-    .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 60px; border-radius: 20px; overflow: hidden; max-width: 720px; background: var(--glass-border); }
-    .hero-stat { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); padding: 24px 20px; text-align: center; }
-    .hero-stat-value { font-size: 32px; font-weight: 800; color: #fff; line-height: 1; }
+    .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 60px; max-width: 720px; }
+    .hero-stat { background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 24px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; transition: background 0.2s, border-color 0.2s; }
+    .hero-stat:hover { background: rgba(255,255,255,0.07); border-color: rgba(242,102,37,0.25); }
+    .hero-stat-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(242,102,37,0.12); display: flex; align-items: center; justify-content: center; }
+    .hero-stat-icon svg { width: 20px; height: 20px; stroke: var(--brand); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .hero-stat-value { font-size: 30px; font-weight: 800; color: #fff; line-height: 1; }
     .hero-stat-value span { color: var(--brand); }
-    .hero-stat-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; letter-spacing: 0.5px; }
+    .hero-stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.6px; text-transform: uppercase; }
     @media (max-width: 640px) { .hero-stats { grid-template-columns: repeat(2, 1fr); } }
 
     /* ═══ SECTIONS ═══ */
@@ -222,6 +225,10 @@
       animation: shimmer 3s ease-in-out infinite;
     }
     @keyframes shimmer { 0%, 100% { left: -100%; } 50% { left: 100%; } }
+    @keyframes pm-slide { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+    .logo-pipe { color: #fff !important; font-style: normal !important; font-weight: 500 !important; }
+    .logo-pm-wrap { display: inline-block; overflow: hidden; vertical-align: middle; margin-left: -3px; }
+    .logo-pm { display: inline-block; color: #fff !important; white-space: nowrap; font-style: normal !important; font-weight: 500 !important; animation: pm-slide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
 
     /* Brand accent glow pulse on CTA */
     .btn-primary { position: relative; overflow: hidden; }
@@ -261,6 +268,30 @@
     .portfolio-tag { transition: background 0.2s; }
     .portfolio-tag:hover { background: rgba(255,255,255,0.1); }
 
+    /* Cursor spotlight in hero */
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(242,102,37,0.08) 0%, transparent 70%); pointer-events: none; transform: translate(-50%, -50%); transition: opacity 0.4s; opacity: 0; }
+
+    /* Stat card icon hover spin */
+    .hero-stat:hover .hero-stat-icon svg { transform: rotate(15deg) scale(1.15); }
+    .hero-stat-icon svg { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* Stat card stagger entrance */
+    .hero-stat { opacity: 0; transform: translateY(20px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1), background 0.2s, border-color 0.2s; }
+    .hero-stat.visible { opacity: 1; transform: translateY(0); }
+    .hero-stat:nth-child(1) { transition-delay: 0.1s; }
+    .hero-stat:nth-child(2) { transition-delay: 0.2s; }
+    .hero-stat:nth-child(3) { transition-delay: 0.3s; }
+    .hero-stat:nth-child(4) { transition-delay: 0.4s; }
+
+    /* Button ripple */
+    .btn-primary, .btn-ghost, .btn-white { position: relative; overflow: hidden; }
+    .ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple-anim 0.6s linear; background: rgba(255,255,255,0.25); pointer-events: none; }
+    @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
+
+    /* CTA section animated background */
+    @keyframes cta-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .cta-section { background: linear-gradient(135deg, var(--brand), #c8490a, var(--brand), #ff7a3d) !important; background-size: 300% 300% !important; animation: cta-shift 8s ease infinite; }
+
     /* Reduce motion */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -275,8 +306,10 @@
       .hero-eyebrow { font-size: 10px; padding: 6px 14px; letter-spacing: 1.5px; }
       .hero-actions { gap: 12px; margin-top: 28px; }
       .btn-primary, .btn-ghost { padding: 14px 28px; font-size: 14px; width: 100%; text-align: center; }
-      .hero-stats { margin-top: 40px; gap: 1px; border-radius: 14px; }
-      .hero-stat { padding: 16px 12px; }
+      .hero-stats { margin-top: 40px; gap: 8px; }
+      .hero-stat { padding: 18px 12px; border-radius: 14px; }
+      .hero-stat-icon { width: 34px; height: 34px; border-radius: 10px; }
+      .hero-stat-icon svg { width: 16px; height: 16px; }
       .hero-stat-value { font-size: 24px; }
       .hero-stat-label { font-size: 10px; }
       .section { padding: 64px 0; }
@@ -320,7 +353,7 @@
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="container nav-inner">
-      <a href="#" class="logo">RedRiver<span>One</span> <span style="font-family:var(--font);font-size:0.5em;font-weight:500;font-style:normal;color:var(--text-muted);margin-left:4px;">| Property Management</span></a>
+      <a href="#" class="logo">RedRiver<span>One</span> <span class="logo-pipe" style="font-family:var(--font);font-size:0.6em;margin-left:4px;">|</span><span class="logo-pm-wrap" style="font-family:var(--font);font-size:0.6em;"><span class="logo-pm">&nbsp;&nbsp;Property Management</span></span></a>
       <div class="nav-links">
         <a href="#services">Services</a>
         <a href="#portfolio">Portfolio</a>
@@ -337,6 +370,7 @@
       <source src="assets/video/bg.mp4" type="video/mp4" />
     </video>
     <div class="hero-overlay"></div>
+    <div class="hero-glow" id="heroGlow"></div>
     <div class="container hero-content">
       <div class="hero-eyebrow">Property Management · Texas</div>
       <h1>Your property, managed like it <em>matters.</em></h1>
@@ -347,18 +381,30 @@
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
+          <div class="hero-stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+          </div>
           <div class="hero-stat-value">5</div>
           <div class="hero-stat-label">Properties Managed</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-value">90<span>d</span></div>
+          <div class="hero-stat-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div class="hero-stat-value">90<span>D</span></div>
           <div class="hero-stat-label">Visible Results</div>
         </div>
         <div class="hero-stat">
+          <div class="hero-stat-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
           <div class="hero-stat-value">8</div>
           <div class="hero-stat-label">Lifecycle Stages</div>
         </div>
         <div class="hero-stat">
+          <div class="hero-stat-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
           <div class="hero-stat-value">24<span>/7</span></div>
           <div class="hero-stat-label">Operations</div>
         </div>
@@ -475,12 +521,12 @@
           </div>
         </div>
         <div class="portfolio-card reveal-scale">
-          <img src="assets/images/portfolio/3330-Unicorn-Lake.jpg" alt="3330 Unicorn Lake" class="portfolio-img" loading="lazy" decoding="async" />
+          <img src="assets/images/portfolio/3330-Unicorn-Lake-new.jpg" alt="3330 Unicorn Lake" class="portfolio-img" loading="lazy" decoding="async" />
           <span class="portfolio-badge badge-soon">Coming Soon</span>
           <div class="portfolio-info">
             <div class="portfolio-name">3330 Unicorn Lake</div>
-            <div class="portfolio-loc">Texas</div>
-            <div class="portfolio-type">Single Family · Residential</div>
+            <div class="portfolio-loc">Denton, TX 76210</div>
+            <div class="portfolio-type">150 Unit · Multi Family</div>
           </div>
         </div>
       </div>
@@ -565,7 +611,7 @@
       <h2 class="section-title" style="font-family:var(--serif);color:#fff;">Let's talk about your property.</h2>
       <div class="cta-actions">
         <a href="mailto:hi@redriver.one" class="btn-white">hi@redriver.one</a>
-        <a href="tel:9452974662" class="btn-white">(945) 297-4662</a>
+        <a href="tel:+19452974662" class="btn-white">+1 (945) 297-4662</a>
       </div>
     </div>
   </section>
@@ -574,7 +620,7 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div>
-        <span class="logo" style="font-size:20px;">RedRiver<span>One</span> <span style="font-family:var(--font);font-size:0.5em;font-weight:500;font-style:normal;color:var(--text-muted);margin-left:4px;">| Property Management</span></span>
+        <span class="logo" style="font-size:20px;">RedRiver<span>One</span> <span class="logo-pipe" style="font-family:var(--font);font-size:0.6em;margin-left:4px;">|</span><span class="logo-pm-wrap" style="font-family:var(--font);font-size:0.6em;"><span class="logo-pm">&nbsp;&nbsp;Property Management</span></span></span>
         <p class="footer-copy" style="margin-top:8px;">© 2026 Red River One LLC — Dallas, Texas</p>
       </div>
       <div class="footer-links">
@@ -611,6 +657,56 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } })
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' })
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el))
+
+    // Stat card stagger + number counter on scroll
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return
+        e.target.classList.add('visible')
+        const valEl = e.target.querySelector('.hero-stat-value')
+        const text = valEl.innerHTML
+        const match = text.match(/^(\d+)(.*)$/)
+        if (match) {
+          const target = parseInt(match[1])
+          const suffix = match[2]
+          let start = 0
+          const duration = 1200
+          const step = (timestamp) => {
+            if (!start) start = timestamp
+            const progress = Math.min((timestamp - start) / duration, 1)
+            const ease = 1 - Math.pow(1 - progress, 3)
+            valEl.innerHTML = Math.round(ease * target) + suffix
+            if (progress < 1) requestAnimationFrame(step)
+          }
+          requestAnimationFrame(step)
+        }
+        statObserver.unobserve(e.target)
+      })
+    }, { threshold: 0.3 })
+    document.querySelectorAll('.hero-stat').forEach(el => statObserver.observe(el))
+
+    // Cursor spotlight in hero
+    const heroGlow = document.getElementById('heroGlow')
+    const hero = document.querySelector('.hero')
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect()
+      heroGlow.style.left = (e.clientX - rect.left) + 'px'
+      heroGlow.style.top = (e.clientY - rect.top) + 'px'
+      heroGlow.style.opacity = '1'
+    })
+    hero.addEventListener('mouseleave', () => { heroGlow.style.opacity = '0' })
+
+    // Button ripple
+    document.querySelectorAll('.btn-primary, .btn-ghost, .btn-white').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const r = document.createElement('span')
+        r.className = 'ripple'
+        const size = Math.max(btn.offsetWidth, btn.offsetHeight)
+        r.style.cssText = `width:${size}px;height:${size}px;left:${e.offsetX - size/2}px;top:${e.offsetY - size/2}px`
+        btn.appendChild(r)
+        setTimeout(() => r.remove(), 600)
+      })
+    })
 
     // Parallax tilt on portfolio cards
     document.querySelectorAll('.portfolio-card').forEach(card => {
